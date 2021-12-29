@@ -35,15 +35,15 @@ export default function Example() {
           </form>
         </div>
       </div>
-      <div className="text-center">
-        <span className="Inter text-2xl text-gray-800">
+      <div className="text-center space-x-4 Inter text-2xl text-gray-800">
+        <span>
           <FontAwesomeIcon icon={faCrown} />
-          USERさんと相性が合いそうなユーザー
         </span>
+        <span>USERさんと相性が合いそうなユーザー</span>
       </div>
-      <p className="m-4 Inter text-2xl text-gray-800 text-center">
-        相性20%マッチ
-      </p>
+      <div className="text-center space-x-4 Inter text-xl text-gray-800">
+        <span>相性20%マッチ</span>
+      </div>
       <div className="grid grid-cols-3 gap-4 justify-items-auto h-48">
         <div className="text-gray-700 flex justify-center items-center px-4 py-2">
           <div className="flex">
@@ -85,9 +85,9 @@ export default function Example() {
           </div>
         </div>
       </div>
-      <p className="m-4 Inter text-2xl text-gray-800 text-center">
-        相性15%マッチ
-      </p>
+      <div className="text-center space-x-4 Inter text-xl text-gray-800">
+        <span>相性15%マッチ</span>
+      </div>
       <div className="grid grid-cols-3 gap-4 justify-items-auto h-48">
         <div className="text-gray-700 flex justify-center items-center px-4 py-2">
           <img
