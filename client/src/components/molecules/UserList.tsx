@@ -1,7 +1,9 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-export default function UserList() {
+export default function UserList(props: any) {
+  const { userId } = props;
+
   return (
     <>
       <div className="text-center space-x-4 dark:text-gray-50 text-gray-900 text-lg">
