@@ -1,6 +1,9 @@
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCrown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-export default function SearchBox() {
+
+const SearchBox = (props: any) => {
+  const { onSearch, onChange, onClear } = props;
+
   return (
     <>
       <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12 px-4 py-16">
@@ -8,18 +11,33 @@ export default function SearchBox() {
           <h1 className="m-4 text-2xl text-gray-800 text-center">
             あなたの「好き」を見つける。
           </h1>
-          <div className="relative flex w-full flex-wrap items-stretch mb-3">
+          <p className="m-4 text-s text-gray-800 text-center">
+            <FontAwesomeIcon icon={faCrown} />
+            オールタイムミュージックランキング
+            <button
+              onClick={onSearch}
+              type="button"
+              className="m-4 bg-white hover:bg-gray-100 text-xs text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            >
+              設定する
+            </button>
+          </p>
+          {/* <form className="relative flex w-full flex-wrap items-stretch mb-3">
             <input
               type="text"
               placeholder="曲名を検索"
               className="px-3 py-4 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"
+              onChange={onChange}
             />
             <span className="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-lg items-center justify-center w-8 right-0 pr-3 py-4">
-              <FontAwesomeIcon icon={faSearch} />
+              <button onClick={onSearch} type="button">
+                <FontAwesomeIcon icon={faSearch} />
+              </button>
             </span>
-          </div>
+          </form> */}
         </div>
       </div>
     </>
   );
-}
+};
+export default SearchBox;
