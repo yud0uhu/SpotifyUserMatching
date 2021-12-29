@@ -9,7 +9,6 @@ export default function Example() {
           <p className="m-4 Inter text-2xl text-gray-800 text-center">
             あなたの「好き」を見つける。
           </p>
-
           <form className="group relative">
             <svg
               width="20"
@@ -33,6 +32,7 @@ export default function Example() {
           </form>
         </div>
       </div>
+
       <p className="m-4 Inter text-2xl text-gray-800 text-center">
         USERさんと相性が合いそうなユーザー
       </p>
