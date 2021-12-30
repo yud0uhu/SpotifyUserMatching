@@ -6,6 +6,7 @@ from schema import schema
 
 # FastAPIのインスタンスを作成
 app = FastAPI()
+app.debug = True
 
 # GraphQLを提供するためのエンドポイントを定義
 app.add_route("/graphql", GraphQLApp(schema=schema))
