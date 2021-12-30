@@ -22,15 +22,15 @@ class User(Base):
     user_name = Column(String)
     
 
-# class Track(Base):
-#     __tablename__ = "tracks"
+class Track(Base):
+    __tablename__ = "tracks"
     
-#     track_id = Column(Integer, nullable=False, primary_key=True)
-#     track_name=Column(String(255), nullable=False)
-#     audio=Column(String(255), nullable=False)
-#     cover_art=Column(String(255), nullable=False)
-#     # Userにrelationを張る,1ユーザーに対して1Track
-#     user_id = Column(Integer, ForeignKey('users.id'))
-#     user=relationship(
-#         User,
-#         backref=backref('tracks', uselist=True, cascade='delete,all'))
+    track_id = Column(Integer, nullable=False, primary_key=True)
+    track_name=Column(String(255), nullable=False)
+    audio=Column(String(255), nullable=False)
+    cover_art=Column(String(255), nullable=False)
+    # Userにrelationを張る,1ユーザーに対して1Track
+    user_id = Column(Integer, ForeignKey('users.id'))
+    user=relationship(
+        User,
+        backref=backref('tracks', uselist=True, cascade='delete,all'))
