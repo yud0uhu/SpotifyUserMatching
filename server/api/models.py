@@ -13,6 +13,15 @@ db_session = scoped_session(sessionmaker(autocommit=False,
 Base = declarative_base()
 Base.query = db_session.query_property()
 
+
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, nullable=False, primary_key=True)
+    twitter_id = Column(Integer)
+    user_name = Column(String(255))
+    
+
 class Track(Base):
     __tablename__ = "tracks"
     
@@ -21,12 +30,7 @@ class Track(Base):
     audio=Column(String(255), nullable=False)
     cover_art=Column(String(255), nullable=False)
     # Userにrelationを張る,1ユーザーに対して1Track
-    # user=relationship("User")
-
-class User(Base):
-    __tablename__ = 'users'
-
-    user_id = Column(Integer, nullable=False, primary_key=True)
-    twitter_id = Column(Integer)
-    user_name = Column(String(255))
-    
+    user_id = Column(Integer, ForeignKey('users.id'))
+    user=relationship(
+        User,
+        backref=backref('tracks', uselist=True, cascade='delete,all'))
