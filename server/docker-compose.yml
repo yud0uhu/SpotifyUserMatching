@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  # FastAPI
+  api:
+    container_name: "fast_api"
+    build: ./docker/uvicorn
+    restart: always
+    tty: true
+    ports:
+      - 8000:8000
+    volumes:
+      - ./api:/usr/src/api
