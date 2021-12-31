@@ -26,11 +26,11 @@ class Track(Base):
     __tablename__ = "tracks"
     
     track_id = Column(String, nullable=False, primary_key=True)
-    track_name=Column(String, nullable=False)
-    audio=Column(String, nullable=False)
-    cover_art=Column(String, nullable=False)
+    track_name=Column(String)
+    audio=Column(String)
+    cover_art=Column(String)
     # Userにrelationを張る,1ユーザーに対して1Track
-    user_id = Column(String, ForeignKey('users.id'))
+    user_id = Column(String, ForeignKey('users.id'), primary_key=True)
     user=relationship(
         User,
         backref=backref('tracks', uselist=True, cascade='delete,all'))
@@ -38,12 +38,13 @@ class Track(Base):
 class FeatureTrack(Base):
     __tablename__ = "feature_tracks"
     
-    energy = Column(String, nullable=False)
-    danceability =Column(String, nullable=False)
-    mode =Column(String, nullable=False)
-    acousticness =Column(String, nullable=False)
+    energy = Column(String)
+    danceability =Column(String)
+    mode =Column(String)
+    acousticness =Column(String)
     # Trackにrelationを張る,1Trackに対して1特徴量データ
     track_id = Column(String, ForeignKey('tracks.track_id'), primary_key=True)
+    user_id = Column(String, primary_key=True)
     tracks=relationship(
         Track,
         backref=backref('feature_tracks', uselist=True, cascade='delete,all'))
