@@ -25,10 +25,15 @@ class Track(SQLAlchemyObjectType):
 #     all_tracks = SQLAlchemyConnectionField(TrackConnections, sort=None)
 
 class Query(graphene.ObjectType):
-    users = graphene.List(User)
+    all_users = graphene.List(User)
+    all_tracks = graphene.List(Track)
 
-    def resolve_users(self, info):
+    def resolve_all_users(self, info):
         query = User.get_query(info)  # SQLAlchemy query
         return query.all()
+
+    def resolve_all_traks(self, info):
+        query = Track.get_query(info)  # SQLAlchemy query
+        return query.all()        
 
 schema = graphene.Schema(query=Query)
