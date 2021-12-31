@@ -4,3 +4,5 @@ graphene
 SQLAlchemy
 graphene_sqlalchemy
 promise
+spotipy
+python-dotenv
