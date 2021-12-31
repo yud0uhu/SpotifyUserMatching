@@ -3,45 +3,40 @@ import Header from "./components/organisms/Header";
 import SearchBox from "./components/organisms/SearchBox";
 import UserList from "./components/molecules/UserList";
 import SendAction from "./SendAction";
+import RankPage from "./components/organisms/RankPage";
+import { Router, Route } from "react-router-dom";
 
-export default function App() {
-  const [searchText, setSearchText] = useState("");
+interface Props {}
+export default function App({}: Props) {
   const [dataContainer, setDataContainer] = useState([]);
 
   const handleClear = () => {
-    // ここに処理を記述
-    // Idをもとに空の配列をもってきてフォームを初期化する
     setDataContainer([]);
   };
 
   const handleChangeDataState = (dataList: never) => {
     const newDataContainer = [...dataContainer, dataList];
     setDataContainer(newDataContainer[0]["id"]);
-  };
-
-  const handleChange = (event: any) => {
-    const newSearchText = event.target.value;
-    setSearchText(newSearchText);
-    // console.log(newSearchText);
-    // console.log(searchText);
+    console.log(newDataContainer);
   };
 
   const handleSearch = () => {
-    SendAction(handleChangeDataState, searchText);
+    SendAction(handleChangeDataState);
   };
 
   return (
     <div>
       <Header />
-      <SearchBox
-        onSearch={handleSearch}
-        onChange={handleChange}
-        onClear={handleClear}
-      />
+      <SearchBox onSearch={handleSearch} onClear={handleClear} />
       <div>{dataContainer}</div>
       <div className="bg-cover bg-gray-50">
         <UserList userId={dataContainer} />
       </div>
+      {/* <Router history={history}>
+        <div>
+          <Route path="/ranking" exact component={RankPage} />
+        </div>
+      </Router> */}
     </div>
   );
 }

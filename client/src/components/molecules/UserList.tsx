@@ -3,6 +3,7 @@ import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function UserList(props: any) {
   const { userId } = props;
+  // console.log(userId);
 
   return (
     <>

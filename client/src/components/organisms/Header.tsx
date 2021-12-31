@@ -9,17 +9,10 @@ export default function Header() {
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <a
               className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
-              href="#pablo"
+              href="/"
             >
               Alltime Music Matchting
             </a>
-            <button
-              className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
-              type="button"
-              onClick={() => setNavbarOpen(!navbarOpen)}
-            >
-              <i className="fas fa-bars"></i>
-            </button>
           </div>
           <div
             className={
@@ -32,7 +25,7 @@ export default function Header() {
               <li className="nav-item">
                 <a
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                  href="#pablo"
+                  href="/mypage"
                 >
                   <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i>
                   <span className="ml-2">My Page</span>
@@ -41,7 +34,7 @@ export default function Header() {
               <li className="nav-item">
                 <a
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                  href="#pablo"
+                  href="/logout"
                 >
                   <i className="fab fa-pinterest text-lg leading-lg text-white opacity-75"></i>
                   <span className="ml-2">Logout</span>
