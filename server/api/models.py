@@ -34,3 +34,16 @@ class Track(Base):
     user=relationship(
         User,
         backref=backref('tracks', uselist=True, cascade='delete,all'))
+
+class FeatureTrack(Base):
+    __tablename__ = "feature_tracks"
+    
+    energy = Column(Integer, nullable=False)
+    danceability =Column(Integer, nullable=False)
+    mode =Column(Integer, nullable=False)
+    acousticness =Column(Integer, nullable=False)
+    # Trackにrelationを張る,1Trackに対して1特徴量データ
+    track_id = Column(Integer, ForeignKey('tracks.track_id'))
+    tracks=relationship(
+        Track,
+        backref=backref('feature_tracks', uselist=True, cascade='delete,all'))

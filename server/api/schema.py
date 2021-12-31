@@ -1,7 +1,7 @@
 import graphene
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
-from models import User as UserModel, Track as TrackModel
+from models import User as UserModel, Track as TrackModel, FeatureTrack as FeatureTrackModel
 
 class User(SQLAlchemyObjectType):
     class Meta:
@@ -17,6 +17,11 @@ class Track(SQLAlchemyObjectType):
     class Meta:
         model = TrackModel
 
+
+class FeatureTrack(SQLAlchemyObjectType):
+    class Meta:
+        model = FeatureTrackModel        
+
 # class Query(graphene.ObjectType):
 #     node = relay.Node.Field()
 #     # Allows sorting over multiple columns, by default over the primary key
@@ -27,6 +32,7 @@ class Track(SQLAlchemyObjectType):
 class Query(graphene.ObjectType):
     all_users = graphene.List(User)
     all_tracks = graphene.List(Track)
+    all_feature_tracks = graphene.List(FeatureTrack)
 
     def resolve_all_users(self, info):
         query = User.get_query(info)  # SQLAlchemy query
@@ -34,6 +40,11 @@ class Query(graphene.ObjectType):
 
     def resolve_all_traks(self, info):
         query = Track.get_query(info)  # SQLAlchemy query
-        return query.all()        
+        return query.all()
+        
+    def resolve_all_feature_traks(self, info):
+        query = FeatureTrack.get_query(info)  # SQLAlchemy query
+        return query.all()
+
 
 schema = graphene.Schema(query=Query)
