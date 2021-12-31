@@ -17,7 +17,7 @@ Base.query = db_session.query_property()
 class User(Base):
     __tablename__ = 'users'
 
-    id = Column(Integer, nullable=False, primary_key=True)
+    id = Column(String, nullable=False, primary_key=True)
     twitter_id = Column(String)
     user_name = Column(String)
     
@@ -25,12 +25,12 @@ class User(Base):
 class Track(Base):
     __tablename__ = "tracks"
     
-    track_id = Column(Integer, nullable=False, primary_key=True)
-    track_name=Column(String(255), nullable=False)
-    audio=Column(String(255), nullable=False)
-    cover_art=Column(String(255), nullable=False)
+    track_id = Column(String, nullable=False, primary_key=True)
+    track_name=Column(String, nullable=False)
+    audio=Column(String, nullable=False)
+    cover_art=Column(String, nullable=False)
     # Userにrelationを張る,1ユーザーに対して1Track
-    user_id = Column(Integer, ForeignKey('users.id'))
+    user_id = Column(String, ForeignKey('users.id'))
     user=relationship(
         User,
         backref=backref('tracks', uselist=True, cascade='delete,all'))
@@ -38,12 +38,12 @@ class Track(Base):
 class FeatureTrack(Base):
     __tablename__ = "feature_tracks"
     
-    energy = Column(Integer, nullable=False)
-    danceability =Column(Integer, nullable=False)
-    mode =Column(Integer, nullable=False)
-    acousticness =Column(Integer, nullable=False)
+    energy = Column(String, nullable=False)
+    danceability =Column(String, nullable=False)
+    mode =Column(String, nullable=False)
+    acousticness =Column(String, nullable=False)
     # Trackにrelationを張る,1Trackに対して1特徴量データ
-    track_id = Column(Integer, ForeignKey('tracks.track_id'))
+    track_id = Column(String, ForeignKey('tracks.track_id'), primary_key=True)
     tracks=relationship(
         Track,
         backref=backref('feature_tracks', uselist=True, cascade='delete,all'))
