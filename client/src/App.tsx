@@ -16,7 +16,7 @@ export default function App({}: Props) {
 
   const handleChangeDataState = (dataList: never) => {
     const newDataContainer = [...dataContainer, dataList];
-    setDataContainer(newDataContainer[0]["id"]);
+    setDataContainer(newDataContainer);
     console.log(newDataContainer);
   };
 
@@ -25,18 +25,17 @@ export default function App({}: Props) {
   };
 
   return (
-    <div>
+    <>
       <Header />
       <SearchBox onSearch={handleSearch} onClear={handleClear} />
-      <div>{dataContainer}</div>
       <div className="bg-cover bg-gray-50">
-        <UserList userId={dataContainer} />
+        <UserList users={dataContainer} />
       </div>
       {/* <Router history={history}>
         <div>
           <Route path="/ranking" exact component={RankPage} />
         </div>
       </Router> */}
-    </div>
+    </>
   );
 }

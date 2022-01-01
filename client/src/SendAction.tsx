@@ -3,6 +3,8 @@
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 
+import UserList from "./components/molecules/UserList";
+
 // GraphQL
 export default function SendAction(handleChangeDataState: any) {
   const client = new ApolloClient({
@@ -10,11 +12,25 @@ export default function SendAction(handleChangeDataState: any) {
   });
 
   const query = gql`
-    query {
+    {
       allUsers {
-        userName
         id
         twitterId
+        userName
+        tracks {
+          userId
+          trackId
+          trackName
+          audio
+          coverArt
+          featureTracks {
+            trackId
+            danceability
+            acousticness
+            energy
+            mode
+          }
+        }
       }
     }
   `;
@@ -23,7 +39,13 @@ export default function SendAction(handleChangeDataState: any) {
     .query({
       query,
     })
-    .then((result) => handleChangeDataState(result.data));
+    .then((result) => {
+      let postdata = result.data.allUsers;
+      if (postdata !== undefined) {
+        console.log(postdata);
+        handleChangeDataState(postdata);
+      }
+    });
 }
 
 // REST API
