@@ -2,7 +2,7 @@ import { faCrown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RankSetButton from "../atoms/RankSetButton";
 const SearchBox = (props: any) => {
-  const { onSearch, onChange, onClear } = props;
+  const { onClick, onSearch, onChange, onClear } = props;
 
   return (
     <>
@@ -14,7 +14,7 @@ const SearchBox = (props: any) => {
           <p className="m-4 text-s text-gray-800 text-center">
             <FontAwesomeIcon icon={faCrown} />
             オールタイムミュージックランキング
-            <RankSetButton />
+            <RankSetButton onClick={onClick} />
           </p>
           <button className="text-xl" onClick={onSearch} type="button">
             <FontAwesomeIcon icon={faSearch} />

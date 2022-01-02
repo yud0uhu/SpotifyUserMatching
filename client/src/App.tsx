@@ -9,19 +9,30 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 interface Props {}
 export default function App({}: Props) {
   const [dataContainer, setDataContainer] = useState([]);
+  const [uniqueData, setUniqueData] = useState([]);
 
   const handleClear = () => {
     setDataContainer([]);
   };
 
-  const handleChangeDataState = (dataList) => {
+  const handleChangeDataState = (dataList, param) => {
     const newDataContainer = [...dataContainer, dataList];
-    setDataContainer(newDataContainer);
-    console.log(dataList);
+    if (param === "") {
+      const newDataContainer = [...dataContainer, dataList];
+      setDataContainer(newDataContainer);
+      console.log(dataList);
+    } else {
+      setUniqueData(dataList.id);
+      console.log(dataList.id);
+    }
   };
 
   const handleSearch = () => {
-    SendAction(handleChangeDataState);
+    SendAction(handleChangeDataState, "");
+  };
+
+  const handleClickChange = () => {
+    SendAction(handleChangeDataState, "unique");
   };
 
   // 画面へレンダリングする要素を定義
@@ -33,11 +44,16 @@ export default function App({}: Props) {
           <Route
             path="/"
             element={
-              <SearchBox onSearch={handleSearch} onClear={handleClear} />
+              <SearchBox
+                onClick={handleClickChange}
+                onSearch={handleSearch}
+                onClear={handleClear}
+              />
             }
           />
-          <Route path="/ranking" element={<RankPage />} />
+          <Route path="/ranking" element={<RankPage userId={uniqueData} />} />
         </Routes>
+
         <div className="bg-cover bg-gray-50">
           {dataContainer.map((dataList, index) => (
             <UserList allUsersList={dataList} key={index} />

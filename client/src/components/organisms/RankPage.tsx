@@ -1,11 +1,16 @@
-import Header from "../organisms/Header";
+import { faCrown, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const RankPage = (props: any) => {
-  const { userId } = props;
+  const { userId, userName } = props;
 
   return (
     <div>
-      <h1>RANKING!!!{userId}</h1>
+      {userId}さんのマイページ
+      <p className="m-4 text-xl text-gray-800 text-center">
+        <FontAwesomeIcon icon={faCrown} />
+        オールタイムミュージックランキング
+      </p>
     </div>
   );
 };
