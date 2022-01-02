@@ -22,7 +22,7 @@ export default function App({}: Props) {
       setDataContainer(newDataContainer);
       console.log(dataList);
     } else {
-      setUniqueData(dataList.id);
+      setUniqueData(dataList);
       console.log(dataList.id);
     }
   };
@@ -51,7 +51,10 @@ export default function App({}: Props) {
               />
             }
           />
-          <Route path="/ranking" element={<RankPage userId={uniqueData} />} />
+          <Route
+            path="/ranking"
+            element={<RankPage uniqueData={uniqueData} />}
+          />
         </Routes>
 
         <div className="bg-cover bg-gray-50">
