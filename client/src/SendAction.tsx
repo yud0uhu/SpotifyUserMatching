@@ -3,8 +3,6 @@
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 
-import UserList from "./components/molecules/UserList";
-
 // GraphQL
 export default function SendAction(handleChangeDataState: any) {
   const client = new ApolloClient({
@@ -43,6 +41,7 @@ export default function SendAction(handleChangeDataState: any) {
       let allUsersData = result.data.allUsers;
       if (allUsersData !== undefined) {
         // console.log(allUsersData);
+        // ユーザー情報が格納された配列を渡す
         handleChangeDataState(allUsersData);
       }
     });
