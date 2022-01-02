@@ -4,7 +4,7 @@ import SearchBox from "./components/organisms/SearchBox";
 import UserList from "./components/molecules/UserList";
 import SendAction from "./SendAction";
 import RankPage from "./components/organisms/RankPage";
-import { Router, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 interface Props {}
 export default function App({}: Props) {
@@ -28,17 +28,22 @@ export default function App({}: Props) {
   return (
     <>
       <Header />
-      <SearchBox onSearch={handleSearch} onClear={handleClear} />
-      <div className="bg-cover bg-gray-50">
-        {dataContainer.map((dataList, index) => (
-          <UserList allUsersList={dataList} key={index} />
-        ))}
-      </div>
-      {/* <Router history={history}>
-        <div>
-          <Route path="/ranking" exact component={RankPage} />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <SearchBox onSearch={handleSearch} onClear={handleClear} />
+            }
+          />
+          <Route path="/ranking" element={<RankPage />} />
+        </Routes>
+        <div className="bg-cover bg-gray-50">
+          {dataContainer.map((dataList, index) => (
+            <UserList allUsersList={dataList} key={index} />
+          ))}
         </div>
-      </Router> */}
+      </BrowserRouter>
     </>
   );
 }

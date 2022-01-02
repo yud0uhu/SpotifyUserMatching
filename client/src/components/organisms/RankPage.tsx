@@ -1,10 +1,12 @@
 import Header from "../organisms/Header";
 
-export default function RankPage() {
+const RankPage = (props: any) => {
+  const { userId } = props;
+
   return (
     <div>
-      <Header />
-      <h1>RANKING!!!</h1>
+      <h1>RANKING!!!{userId}</h1>
     </div>
   );
-}
+};
+export default RankPage;
