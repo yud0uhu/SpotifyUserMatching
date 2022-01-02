@@ -4,7 +4,10 @@ import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 
 // GraphQL
-export default function SendAction(handleChangeDataState, param: string) {
+export default function SendAction(
+  handleChangeDataState: Function,
+  param: string
+) {
   const client = new ApolloClient({
     uri: "http://localhost:8000/graphql",
   });

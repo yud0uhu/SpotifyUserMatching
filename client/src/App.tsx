@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/organisms/Header";
 import SearchBox from "./components/organisms/SearchBox";
 import UserList from "./components/molecules/UserList";
@@ -8,25 +8,27 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 interface Props {}
 export default function App({}: Props) {
-  const [dataContainer, setDataContainer] = useState([]);
-  const [uniqueData, setUniqueData] = useState([]);
+  const [dataContainer, setDataContainer] = useState<[][]>([]);
+  const [uniqueData, setUniqueData] = useState<[][]>([]);
 
   const handleClear = () => {
     setDataContainer([]);
   };
-
-  const handleChangeDataState = (dataList, param) => {
-    const newDataContainer = [...dataContainer, dataList];
+  const handleChangeDataState = (dataList: [], param: string) => {
     if (param === "") {
       const newDataContainer = [...dataContainer, dataList];
+
       setDataContainer(newDataContainer);
-      console.log(dataList);
+
+      console.log(param);
     } else {
-      setUniqueData(dataList);
-      console.log(dataList.id);
+      const newUniqueData = [...uniqueData, dataList];
+
+      setUniqueData(newUniqueData);
+
+      console.log(param);
     }
   };
-
   const handleSearch = () => {
     SendAction(handleChangeDataState, "");
   };

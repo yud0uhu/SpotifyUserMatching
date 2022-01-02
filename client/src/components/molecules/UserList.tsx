@@ -17,6 +17,24 @@ const UserList = (props: any) => {
     />
   ));
 
+  const MatchUser1CardList = allUsersList.map((allusers: any) => (
+    <UserCard
+      userId={allusers.id}
+      twitterId={allusers.twitterId}
+      userName={allusers.userName}
+      key={allusers.id}
+    />
+  ));
+
+  const MatchUser2CardList = allUsersList.map((allusers: any) => (
+    <UserCard
+      userId={allusers.id}
+      twitterId={allusers.twitterId}
+      userName={allusers.userName}
+      key={allusers.id}
+    />
+  ));
+
   return (
     <>
       <div className="text-center space-x-4 dark:text-gray-50 text-gray-900 text-lg">
