@@ -14,22 +14,25 @@ export default function App({}: Props) {
     setDataContainer([]);
   };
 
-  const handleChangeDataState = (dataList: never) => {
+  const handleChangeDataState = (dataList) => {
     const newDataContainer = [...dataContainer, dataList];
     setDataContainer(newDataContainer);
-    console.log(newDataContainer);
+    console.log(dataList);
   };
 
   const handleSearch = () => {
     SendAction(handleChangeDataState);
   };
 
+  // 画面へレンダリングする要素を定義
   return (
     <>
       <Header />
       <SearchBox onSearch={handleSearch} onClear={handleClear} />
       <div className="bg-cover bg-gray-50">
-        <UserList users={dataContainer} />
+        {dataContainer.map((dataList, index) => (
+          <UserList allUsersList={dataList} key={index} />
+        ))}
       </div>
       {/* <Router history={history}>
         <div>

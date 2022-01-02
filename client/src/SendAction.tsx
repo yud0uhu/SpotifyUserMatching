@@ -40,10 +40,10 @@ export default function SendAction(handleChangeDataState: any) {
       query,
     })
     .then((result) => {
-      let postdata = result.data.allUsers;
-      if (postdata !== undefined) {
-        console.log(postdata);
-        handleChangeDataState(postdata);
+      let allUsersData = result.data.allUsers;
+      if (allUsersData !== undefined) {
+        // console.log(allUsersData);
+        handleChangeDataState(allUsersData);
       }
     });
 }

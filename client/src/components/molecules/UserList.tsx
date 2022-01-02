@@ -4,15 +4,16 @@ import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserCard from "../atoms/UserCard";
 const UserList = (props: any) => {
-  const { users } = props;
-  console.log(users);
+  const { allUsersList } = props;
 
-  const UserCardList = users.map((user: any, index: string) => (
+  console.log(allUsersList);
+
+  const UserCardList = allUsersList.map((allusers: any) => (
     <UserCard
-      userId={user[index].id}
-      twitterId={user[index].twitterId}
-      userName={user[index].userName}
-      key={index}
+      userId={allusers.id}
+      twitterId={allusers.twitterId}
+      userName={allusers.userName}
+      key={allusers.id}
     />
   ));
 
@@ -29,6 +30,12 @@ const UserList = (props: any) => {
           相性20%マッチ
         </h2>
       </div>
+      {/* <UserCard
+        userId={allUsersList.id}
+        twitterId={allUsersList.twitterId}
+        userName={allUsersList.userName}
+        key={allUsersList.id}
+      /> */}
       {UserCardList}
       <div className="text-center space-x-4 text-xl space-y-12">
         <h2 className="text-gray-500 dark:text-gray-400 text-sm leading-6 truncate">
