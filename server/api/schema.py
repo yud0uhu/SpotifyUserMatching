@@ -6,28 +6,38 @@ from models import User as UserModel, Track as TrackModel, FeatureTrack as Featu
 class User(SQLAlchemyObjectType):
     class Meta:
         model = UserModel
-        # use `only_fields` to only expose specific fields ie "name"
-        # only_fields = ("name",)
-        # use `exclude_fields` to exclude specific fields ie "last_name"
-        # exclude_fields = ("last_name",)
 
-
-        
 class Track(SQLAlchemyObjectType):
     class Meta:
         model = TrackModel
 
-
 class FeatureTrack(SQLAlchemyObjectType):
     class Meta:
-        model = FeatureTrackModel        
+        model = FeatureTrackModel
 
-# class Query(graphene.ObjectType):
-#     node = relay.Node.Field()
-#     # Allows sorting over multiple columns, by default over the primary key
-#     all_users = SQLAlchemyConnectionField(UserConnections)
-#     # Disable sorting over this field
-#     all_tracks = SQLAlchemyConnectionField(TrackConnections, sort=None)
+
+class UserUpdate(relay.ClientIDMutation) :
+    class Input:
+        id = graphene.String(required=True)
+        twitter_id = graphene.String(required=True)
+        user_name = graphene.String(required=True)
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, twiiter_name, user_name):
+        user = User(id, twiiter_name, user_name)
+        return UserUpdate(user)
+
+class TrackUpdate(relay.ClientIDMutation) :
+    class Input:
+        track_id = graphene.String(required=True)
+        track_name = graphene.String(required=True)
+        audio = graphene.String(required=True)
+        cover_art = graphene.String(required=True)
+        user_id = graphene.String(required=True)
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, track_id, track_name, audio, cover_art, user_id):
+        track = User(track_id, track_name, audio, cover_art, user_id)
+        return TrackUpdate(track)        
 
 class Query(graphene.ObjectType):
     all_users = graphene.List(User)
@@ -46,5 +56,8 @@ class Query(graphene.ObjectType):
         query = FeatureTrack.get_query(info)  # SQLAlchemy query
         return query.all()
 
+class Mutation(graphene.ObjectType):
+    user_update = UserUpdate.Field()
+    track_update = TrackUpdate.Field()
 
-schema = graphene.Schema(query=Query)
+schema = graphene.Schema(query=Query, mutation=Mutation)
