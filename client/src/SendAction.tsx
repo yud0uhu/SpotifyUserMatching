@@ -48,7 +48,8 @@ export default function SendAction(
         // console.log(allUsersData);
         if (param === "") {
           handleChangeDataState(allUsersData, "");
-        } else {
+        }
+        if (param === "unique") {
           // 一意のユーザーの情報が格納された配列を渡す
           let UsersData = allUsersData[0];
           console.log(UsersData);
