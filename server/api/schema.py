@@ -1,5 +1,4 @@
 import graphene
-from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
 from models import User as UserModel, Track as TrackModel, FeatureTrack as FeatureTrackModel
 
@@ -7,42 +6,46 @@ class User(SQLAlchemyObjectType):
     class Meta:
         model = UserModel
 
+
 class Track(SQLAlchemyObjectType):
     class Meta:
         model = TrackModel
+
 
 class FeatureTrack(SQLAlchemyObjectType):
     class Meta:
         model = FeatureTrackModel
 
 
-class UserUpdate(relay.ClientIDMutation) :
-    class Input:
-        id = graphene.String(required=True)
-        twitter_id = graphene.String(required=True)
-        user_name = graphene.String(required=True)
+class UserInput(graphene.InputObjectType):
+    id = graphene.String(required=True)
+    twitter_id = graphene.String(required=True)
+    user_name = graphene.String()
 
-    @classmethod
-    def mutate_and_get_payload(cls, root, info, id, twiiter_name, user_name):
-        user = User(id, twiiter_name, user_name)
-        return UserUpdate(user)
+class UserOutput(graphene.ObjectType):
+    id = graphene.String(required=True)
+    twitter_id = graphene.String(required=True)
+    user_name = graphene.String()
 
-class TrackUpdate(relay.ClientIDMutation) :
-    class Input:
-        track_id = graphene.String(required=True)
-        track_name = graphene.String(required=True)
-        audio = graphene.String(required=True)
-        cover_art = graphene.String(required=True)
-        user_id = graphene.String(required=True)
-    @classmethod
-    def mutate_and_get_payload(cls, root, info, track_id, track_name, audio, cover_art, user_id):
-        track = User(track_id, track_name, audio, cover_art, user_id)
-        return TrackUpdate(track)        
+class CreateUser(graphene.Mutation):
+    class Arguments:
+        user_data = UserInput(required=True)
+
+    user = graphene.Field(UserOutput)
+
+    def mutate(root, info, user_data=None):
+        user = UserOutput(
+            id=user_data.id,
+            twitter_id=user_data.twitter_id,
+            user_name=user_data.user_name
+        )
+        return CreateUser(user=user)
 
 class Query(graphene.ObjectType):
     all_users = graphene.List(User)
     all_tracks = graphene.List(Track)
     all_feature_tracks = graphene.List(FeatureTrack)
+    user = graphene.Field(UserOutput)
 
     def resolve_all_users(self, info):
         query = User.get_query(info)  # SQLAlchemy query
@@ -56,8 +59,9 @@ class Query(graphene.ObjectType):
         query = FeatureTrack.get_query(info)  # SQLAlchemy query
         return query.all()
 
+
+
 class Mutation(graphene.ObjectType):
-    user_update = UserUpdate.Field()
-    track_update = TrackUpdate.Field()
+    create_user = CreateUser.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
