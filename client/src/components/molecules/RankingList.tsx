@@ -3,7 +3,7 @@
 import RankingCard from "../atoms/RankingCard";
 const RankingList = (props: any) => {
   const { uniquetracks } = props;
-  console.log(uniquetracks);
+  // console.log(uniquetracks);
   const rankingCardList = uniquetracks.map((uniquetrack: any) => (
     <RankingCard
       trackId={uniquetrack.trackId}

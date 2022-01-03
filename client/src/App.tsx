@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Header from "./components/organisms/Header";
 import SearchBox from "./components/organisms/SearchBox";
 import UserList from "./components/molecules/UserList";
@@ -55,8 +55,14 @@ export default function App({}: Props) {
           />
           <Route
             path="/ranking"
-            element={<RankPage uniqueData={uniqueData} />}
+            element={uniqueData.map((dataList, index) => (
+              <RankPage uniqueData={dataList} key={index} />
+            ))}
           />
+          {/* <Route
+            path="/ranking"
+            element={<RankPage uniqueData={uniqueData} />}
+          /> */}
         </Routes>
 
         <div className="bg-cover bg-gray-50">

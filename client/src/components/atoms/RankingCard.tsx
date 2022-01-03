@@ -13,6 +13,7 @@ const RankingCard = (props: any) => {
           </div>
           <div className="flex flex-col justify-center">
             <img src={coverArt} alt="アルバム画像" />
+            <a href={audio}>視聴する</a>
           </div>
         </div>
       </div>
