@@ -10,6 +10,7 @@ const RankingList = (props: any) => {
       trackName={uniquetrack.trackName}
       audio={uniquetrack.audio}
       coverArt={uniquetrack.coverArt}
+      key={uniquetrack.trackId}
     />
   ));
 
