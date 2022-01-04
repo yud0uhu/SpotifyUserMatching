@@ -1,4 +1,5 @@
 import RankingCard from "../atoms/RankingCard";
+import UpdateRankingList from "./UpdateRankingList";
 export default function RankingList(props: any) {
   const { uniquetracks } = props;
   // console.log(uniquetracks);
@@ -18,6 +19,7 @@ export default function RankingList(props: any) {
       <div className="bg-cover bg-gray-50">
         <div className="grid grid-cols-3 gap-4 justify-items-auto">
           {rankingCardList}
+          <UpdateRankingList />
         </div>
       </div>
     </>

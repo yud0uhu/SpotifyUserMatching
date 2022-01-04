@@ -3,9 +3,9 @@ import Header from "./components/organisms/Header";
 import SearchView from "./components/organisms/SearchView";
 import UserList from "./components/molecules/UserList";
 import SendAction from "./SendAction";
+import SearchResultView from "./components/organisms/SearchResultView";
 import RankResultView from "./components/organisms/RankResultView";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import RankSetView from "./components/organisms/RankSetView";
 import { ApolloProvider } from "@apollo/client";
 import client from "./graphql/client";
 
@@ -60,14 +60,14 @@ export default function App({}: Props) {
             <Route
               path="/ranking"
               element={uniqueData.map((dataList, index) => (
-                <RankResultView uniqueData={dataList} key={index} />
+                <RankResultView
+                  userId={dataList.id}
+                  uniqueData={dataList}
+                  key={index}
+                />
               ))}
             />
-            <Route path="/setting" element={<RankSetView />} />
-            {/* <Route
-            path="/ranking"
-            element={<RankResult uniqueData={uniqueData} />}
-          /> */}
+            <Route path="/setting" element={<SearchResultView />} />
           </Routes>
 
           <div className="bg-cover bg-gray-50">

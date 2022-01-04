@@ -3,19 +3,10 @@ import { faCrown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SearchResultList from "../molecules/SearchResultList";
-import { useMutation } from "@apollo/client";
-import { CREATE_USER } from "../../graphql/query";
 
-export default function RankSetView() {
+export default function SearchResultView(props: any) {
+  const userId = props;
   const [trackTerm, setTrackTerm] = useState<string>("");
-  console.log(CREATE_USER);
-
-  let inputQuery: Text;
-
-  const [createuser, { loading, error }] = useMutation(CREATE_USER);
-
-  if (loading) return "Submitting...";
-  if (error) return `Submission error! ${error.message}`;
 
   const handleInputChange = (e) => {
     setTrackTerm(() => e.target.value);
@@ -29,14 +20,7 @@ export default function RankSetView() {
         ＜オールタイムミュージックランキング＞設定画面
         <div className="rounded-lg bg-white shadow-lg p-16">
           <div className="flex justify-center">
-            <form
-              className="relative flex w-full flex-wrap items-stretch mb-3"
-              onSubmit={(e) => {
-                e.preventDefault();
-                createuser({ variables: { userName: inputQuery.nodeValue } });
-                inputQuery.nodeValue = "";
-              }}
-            >
+            <form className="relative flex w-full flex-wrap items-stretch mb-3">
               <input
                 value={trackTerm}
                 onChange={handleInputChange}
@@ -49,7 +33,7 @@ export default function RankSetView() {
         </div>
       </div>
 
-      <div>{<SearchResultList trackTerm={trackTerm} />}</div>
+      <div>{<SearchResultList userId={userId} trackTerm={trackTerm} />}</div>
     </div>
   );
 }

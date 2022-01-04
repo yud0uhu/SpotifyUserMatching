@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import SearchResulutCard from "../atoms/SearchResulutCard";
 export default function SeacrchResultList(props: string) {
   const navigate = useNavigate();
-  const { trackTerm } = props;
+  const { userId, trackTerm } = props;
   const [albumTrack, setAlbumTrack] = useState([]);
 
   const trackPreview = (trackTerm) => {
@@ -24,6 +24,7 @@ export default function SeacrchResultList(props: string) {
 
   const searchResulutCardList = albumTrack.map((alubum: any) => (
     <SearchResulutCard
+      userId={userId}
       trackId={alubum.id}
       trackName={alubum.name}
       audio={alubum.preview_url}
