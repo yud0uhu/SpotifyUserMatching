@@ -1,4 +1,4 @@
-export default function SearchResultCard() {
+export default function SearchResultCard(props: string) {
   const { trackId, trackName, audio, coverArt, externalUrls } = props;
 
   return (
