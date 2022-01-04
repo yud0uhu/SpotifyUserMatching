@@ -1,3 +1,5 @@
+import RankReSetButton from "./RankReSetButton";
+
 export default function SearchResultCard(props: string) {
   const { trackId, trackName, audio, coverArt, externalUrls } = props;
 
@@ -15,7 +17,7 @@ export default function SearchResultCard(props: string) {
               <img src={coverArt} alt="アルバム画像" />
             </a>
             <a href={audio}>視聴する</a>
-            <div className="flex justify-center">{<RankSetButton />}</div>
+            <div className="flex justify-center">{<RankReSetButton />}</div>
           </div>
         </div>
       </div>
