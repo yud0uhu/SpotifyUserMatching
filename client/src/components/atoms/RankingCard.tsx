@@ -1,6 +1,5 @@
 const RankingCard = (props: any) => {
-  const { trackId, trackName, audio, coverArt, key } = props;
-  // const { trackId } = props;
+  const { trackId, trackName, audio, coverArt } = props;
 
   return (
     <>

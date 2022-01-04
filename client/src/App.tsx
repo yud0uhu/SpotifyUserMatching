@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import Header from "./components/organisms/Header";
-import SearchBox from "./components/organisms/SearchBox";
+import SearchView from "./components/organisms/SearchView";
 import UserList from "./components/molecules/UserList";
 import SendAction from "./SendAction";
-import RankPage from "./components/organisms/RankPage";
+import RankResultView from "./components/organisms/RankResultView";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import UpdateRankModal from "./components/organisms/UpdateRankModal";
+import RankSetView from "./components/organisms/RankSetView";
 import { ApolloProvider } from "@apollo/client";
 import client from "./graphql/client";
 
@@ -50,7 +50,7 @@ export default function App({}: Props) {
             <Route
               path="/"
               element={
-                <SearchBox
+                <SearchView
                   onClick={handleClickChange}
                   onSearch={handleSearch}
                   onClear={handleClear}
@@ -60,13 +60,13 @@ export default function App({}: Props) {
             <Route
               path="/ranking"
               element={uniqueData.map((dataList, index) => (
-                <RankPage uniqueData={dataList} key={index} />
+                <RankResultView uniqueData={dataList} key={index} />
               ))}
             />
-            <Route path="/setting" element={<UpdateRankModal />} />
+            <Route path="/setting" element={<RankSetView />} />
             {/* <Route
             path="/ranking"
-            element={<RankPage uniqueData={uniqueData} />}
+            element={<RankResult uniqueData={uniqueData} />}
           /> */}
           </Routes>
 

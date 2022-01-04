@@ -1,7 +1,5 @@
-/* This example requires Tailwind CSS v2.0+ */
-
 import RankingCard from "../atoms/RankingCard";
-const RankingList = (props: any) => {
+export default function RankingList(props: any) {
   const { uniquetracks } = props;
   // console.log(uniquetracks);
   const rankingCardList = uniquetracks.map((uniquetrack: any) => (
@@ -24,5 +22,4 @@ const RankingList = (props: any) => {
       </div>
     </>
   );
-};
-export default RankingList;
+}

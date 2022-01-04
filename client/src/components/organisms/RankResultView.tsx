@@ -1,9 +1,10 @@
 import { faCrown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
+import RankReSetButton from "../atoms/RankReSetButton";
 import RankingList from "../molecules/RankingList";
 
-const RankPage = (props: any) => {
+export default function RankResultView(props: any) {
   const { uniqueData } = props;
   const [tracks, setTracks] = useState([]);
   console.log(uniqueData);
@@ -22,9 +23,9 @@ const RankPage = (props: any) => {
       <div className="m-4 text-xl text-gray-800 text-center">
         <FontAwesomeIcon icon={faCrown} />
         オールタイムミュージックランキング
-        {<RankingListRender />}
       </div>
+      <div className="flex justify-center">{<RankReSetButton />}</div>
+      {<RankingListRender />}
     </div>
   );
-};
-export default RankPage;
+}

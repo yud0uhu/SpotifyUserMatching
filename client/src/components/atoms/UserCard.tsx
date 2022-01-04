@@ -1,4 +1,4 @@
-const UserCard = (props: any) => {
+export default function UserCard(props: any) {
   const { userId, twitterId, userName } = props;
 
   return (
@@ -19,5 +19,4 @@ const UserCard = (props: any) => {
       </div>
     </>
   );
-};
-export default UserCard;
+}

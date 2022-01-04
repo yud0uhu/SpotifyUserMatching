@@ -38,3 +38,17 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
+export const CREATE_TRACKS = gql`
+  mutation createUser(
+    $userId: String!
+    $twitterId: String!
+    $userName: String!
+  ) {
+    createuser(userId: $userId, twitterId: $twitterId, userName: $userName) {
+      userId
+      twitterId
+      userName
+    }
+  }
+`;
