@@ -19,19 +19,6 @@ export default function SearchView(props: any) {
           <button className="text-xl" onClick={onSearch} type="button">
             <FontAwesomeIcon icon={faSearch} />
           </button>
-          {/* <form className="relative flex w-full flex-wrap items-stretch mb-3">
-            <input
-              type="text"
-              placeholder="曲名を検索"
-              className="px-3 py-4 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"
-              onChange={onChange}
-            />
-            <span className="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-lg items-center justify-center w-8 right-0 pr-3 py-4">
-              <button onClick={onSearch} type="button">
-                <FontAwesomeIcon icon={faSearch} />
-              </button>
-            </span>
-          </form> */}
         </div>
       </div>
     </>

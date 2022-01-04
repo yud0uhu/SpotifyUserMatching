@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { faCrown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import RankReSetButton from "../atoms/RankReSetButton";
+
 import SearchResultList from "../molecules/SearchResultList";
 import { useMutation } from "@apollo/client";
 import { CREATE_USER } from "../../graphql/query";
@@ -50,7 +50,6 @@ export default function RankSetView() {
       </div>
 
       <div>{<SearchResultList trackTerm={trackTerm} />}</div>
-      <div className="flex justify-center">{<RankReSetButton />}</div>
     </div>
   );
 }
