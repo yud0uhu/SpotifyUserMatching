@@ -52,7 +52,7 @@ for userName in userNameList:
         trackName=track['name']
         Audio=track['preview_url']
         CoverArt=track['album']['images'][0]['url']
-        # print(track)
+        print(track)
 
         insert_track(user_id=Id, track_id=trackId, track_name=trackName, audio=Audio, cover_art=CoverArt)
 

@@ -1,10 +1,19 @@
+import graphene
 from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
 from starlette.graphql import GraphQLApp
 
 from models import db_session
-from schema import schema
+
+from schema import Query, Mutation
 
 from starlette.middleware.cors import CORSMiddleware 
+
+import spotify_connect
+
+from fastapi import APIRouter
+router = APIRouter()
 
 # FastAPIのインスタンスを作成
 app = FastAPI()
@@ -20,7 +29,13 @@ app.add_middleware(
 )
 
 # GraphQLを提供するためのエンドポイントを定義
-app.add_route("/graphql", GraphQLApp(schema=schema))
+app.add_route("/graphql", GraphQLApp(schema=graphene.Schema(query=Query, mutation=Mutation)))
+
+@app.get("/search/{track_term}")
+async def serch_track(track_term):
+    response = spotify_connect.getTrackInf(track_term)
+    return response
+
 
 # APIサーバシャットダウン時にDBセッションを削除
 @app.on_event("shutdown")
