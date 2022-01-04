@@ -1,8 +1,9 @@
 import { faCrown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import UserList from "../molecules/UserList";
 import RankSetButton from "../atoms/RankSetButton";
 export default function SearchView(props: any) {
-  const { onClick, onSearch, onChange, onClear } = props;
+  const { dataContainer, onClick, onSearch, onChange, onClear } = props;
 
   return (
     <>
@@ -20,6 +21,11 @@ export default function SearchView(props: any) {
             <FontAwesomeIcon icon={faSearch} />
           </button>
         </div>
+      </div>{" "}
+      <div className="bg-cover bg-gray-50">
+        {dataContainer.map((dataList, index) => (
+          <UserList allUsersList={dataList} key={index} />
+        ))}
       </div>
     </>
   );

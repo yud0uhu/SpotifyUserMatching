@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import Header from "./components/organisms/Header";
 import SearchView from "./components/organisms/SearchView";
-import UserList from "./components/molecules/UserList";
 import SendAction from "./SendAction";
 import SearchResultView from "./components/organisms/SearchResultView";
 import RankResultView from "./components/organisms/RankResultView";
@@ -51,6 +50,7 @@ export default function App({}: Props) {
               path="/"
               element={
                 <SearchView
+                  dataContainer={dataContainer}
                   onClick={handleClickChange}
                   onSearch={handleSearch}
                   onClear={handleClear}
@@ -70,11 +70,11 @@ export default function App({}: Props) {
             <Route path="/setting" element={<SearchResultView />} />
           </Routes>
 
-          <div className="bg-cover bg-gray-50">
+          {/* <div className="bg-cover bg-gray-50">
             {dataContainer.map((dataList, index) => (
               <UserList allUsersList={dataList} key={index} />
             ))}
-          </div>
+          </div> */}
         </BrowserRouter>
       </ApolloProvider>
     </>
