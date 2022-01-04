@@ -1,51 +1,21 @@
-// import { useEffect } from "react";
-// import axios from "axios";
-import ApolloClient from "apollo-boost";
-import gql from "graphql-tag";
+import { GET_ALLUSERS } from "./graphql/query";
+import client from "./graphql/client";
 
 // GraphQL
 export default function SendAction(
   handleChangeDataState: Function,
   param: string
 ) {
-  const client = new ApolloClient({
-    uri: "http://localhost:8000/graphql",
-  });
-
-  // すべてのユーザー情報を取得
-  const query = gql`
-    {
-      allUsers {
-        id
-        twitterId
-        userName
-        tracks {
-          userId
-          trackId
-          trackName
-          audio
-          coverArt
-          featureTracks {
-            trackId
-            danceability
-            acousticness
-            energy
-            mode
-          }
-        }
-      }
-    }
-  `;
-
   client
     .query({
-      query,
+      // すべてのユーザー情報を取得
+      query: GET_ALLUSERS,
     })
     .then((result) => {
       // すべてのユーザー情報が格納された配列を渡す
       let allUsersData = result.data.allUsers;
       if (allUsersData !== undefined) {
-        // console.log(allUsersData);
+        console.log(allUsersData);
         if (param === "") {
           handleChangeDataState(allUsersData, "");
         }
@@ -56,7 +26,6 @@ export default function SendAction(
           handleChangeDataState(UsersData, param);
         }
       }
-
       // マッチング度20%のユーザー情報を取得
       // let matchUsersData1 = result.data.allUsers;
       // if (matchUsersData1 !== undefined) {
@@ -70,17 +39,3 @@ export default function SendAction(
       // }
     });
 }
-
-// REST API
-// export default function SendAction(handleChangeDataState: any, query: string) {
-//   if (query == "") {
-//     console.log("query");
-//     return;
-//   }
-//   axios.get(`https://pokeapi.co/api/v2/pokemon/1`).then((res) => {
-//     console.log(handleChangeDataState);
-//     console.log(res);
-//     console.log(res.data);
-//     handleChangeDataState(res.data);
-//   });
-// }
