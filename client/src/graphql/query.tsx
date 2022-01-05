@@ -40,15 +40,42 @@ export const CREATE_USER = gql`
 `;
 
 export const CREATE_TRACKS = gql`
-  mutation createUser(
+  mutation createTrack(
+    $trackId: String!
+    $trackName: String!
+    $audio: String!
+    $coverArt: String!
     $userId: String!
-    $twitterId: String!
-    $userName: String!
   ) {
-    createuser(userId: $userId, twitterId: $twitterId, userName: $userName) {
+    createTrack(
+      trackData: {
+        trackId: $trackId
+        trackName: $trackName
+        audio: $audio
+        coverArt: $coverArt
+        userId: $userId
+      }
+    ) {
+      track {
+        trackId
+        trackName
+        audio
+        coverArt
+        userId
+      }
+    }
+  }
+`;
+
+export const QUERY_TRACKS = gql`
+  query {
+    track {
+      trackId
+      trackName
+      coverArt
+      audio
+      coverArt
       userId
-      twitterId
-      userName
     }
   }
 `;
