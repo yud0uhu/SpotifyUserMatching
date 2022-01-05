@@ -57,7 +57,9 @@ export default function App({}: Props) {
                 />
               }
             />
-            <Route
+            <Route path="/ranking" element={<RankResultView />} />
+            {/* DBのモックデータを初期データとして渡す */}
+            {/* <Route
               path="/ranking"
               element={uniqueData.map((dataList, index) => (
                 <RankResultView
@@ -66,15 +68,9 @@ export default function App({}: Props) {
                   key={index}
                 />
               ))}
-            />
+            /> */}
             <Route path="/setting" element={<SearchResultView />} />
           </Routes>
-
-          {/* <div className="bg-cover bg-gray-50">
-            {dataContainer.map((dataList, index) => (
-              <UserList allUsersList={dataList} key={index} />
-            ))}
-          </div> */}
         </BrowserRouter>
       </ApolloProvider>
     </>

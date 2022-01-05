@@ -1,21 +1,32 @@
+import { useLocation } from "react-router-dom";
 import { faCrown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import RankReSetButton from "../atoms/RankReSetButton";
 import RankingList from "../molecules/RankingList";
+import UpdateRankingList from "../molecules/UpdateRankingList";
 
 export default function RankResultView(props: any) {
-  const { uniqueData } = props;
-  const [tracks, setTracks] = useState([]);
-  console.log(uniqueData);
+  // const { uniqueData, uniqueUpdateData } = props;
+  // const [tracks, setTracks] = useState([]);
+  // console.log(uniqueData);
 
-  useEffect(() => {
-    console.log("useEffectが実行されました");
-    setTracks(uniqueData.tracks);
-  });
+  const location = useLocation();
 
-  function RankingListRender() {
-    return <RankingList uniquetracks={tracks} />;
+  console.log(location.state);
+
+  // useEffect(() => {
+  //   console.log("useEffectが実行されました");
+  //   console.log(uniqueUpdateData);
+  //   setTracks(uniqueData.tracks);
+  // });
+
+  // function RankingListRender() {
+  //   return <RankingList uniquetracks={tracks} />;
+  // }
+
+  function UpdateRankingListRender() {
+    return <UpdateRankingList uniquetracks={location.state} />;
   }
 
   return (
@@ -25,7 +36,8 @@ export default function RankResultView(props: any) {
         オールタイムミュージックランキング
       </div>
       <div className="flex justify-center">{<RankReSetButton />}</div>
-      {<RankingListRender />}
+      {/* {<RankingListRender />} */}
+      {<UpdateRankingListRender />}
     </div>
   );
 }
