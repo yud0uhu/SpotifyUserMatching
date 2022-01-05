@@ -1,6 +1,6 @@
 import UpdateButton from "./UpdateButton";
 
-export default function SearchResultCard(props: string) {
+export default function SearchResultCard(props: any) {
   const { userId, trackId, trackName, audio, coverArt, externalUrls } = props;
 
   return (

@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import SearchResulutCard from "../atoms/SearchResulutCard";
-export default function SeacrchResultList(props: string) {
-  const navigate = useNavigate();
+export default function SeacrchResultList(props: any) {
   const { userId, trackTerm } = props;
   const [albumTrack, setAlbumTrack] = useState([]);
 
@@ -43,7 +41,12 @@ export default function SeacrchResultList(props: string) {
       >
         決定
       </button>
-      {searchResulutCardList}
+      <div className="text-center space-x-4 text-xl space-y-12"></div>
+      <div className="bg-cover bg-gray-50">
+        <div className="grid grid-cols-3 gap-4 justify-items-auto">
+          {searchResulutCardList}
+        </div>
+      </div>
     </>
   );
 }
