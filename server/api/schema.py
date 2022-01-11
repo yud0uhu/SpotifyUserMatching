@@ -1,67 +1,109 @@
+from sqlalchemy.sql.functions import mode, user
 import graphene
 from graphene_sqlalchemy import SQLAlchemyObjectType
+from graphene_sqlalchemy import SQLAlchemyConnectionField
+from models import db_session
 from models import User as UserModel, Track as TrackModel, FeatureTrack as FeatureTrackModel
-
-class User(SQLAlchemyObjectType):
+class UserType(SQLAlchemyObjectType):
     class Meta:
         model = UserModel
 
-
-class Track(SQLAlchemyObjectType):
+class TrackType(SQLAlchemyObjectType):
     class Meta:
-        model = TrackModel
+        model = TrackModel        
 
-
-class FeatureTrack(SQLAlchemyObjectType):
+class FeatureTrackType(SQLAlchemyObjectType):
     class Meta:
         model = FeatureTrackModel
 
-
-class UserInput(graphene.InputObjectType):
-    id = graphene.String(required=True)
-    twitter_id = graphene.String(required=True)
-    user_name = graphene.String()
-
-class UserOutput(graphene.ObjectType):
-    id = graphene.String(required=True)
-    twitter_id = graphene.String(required=True)
-    user_name = graphene.String()
-
+# ... the Mutation Class
+## ユーザー情報更新
 class CreateUser(graphene.Mutation):
     class Arguments:
-        user_data = UserInput(required=True)
+        id =  graphene.Int()
+        twitter_id = graphene.String()
+        user_name = graphene.String()
 
-    user = graphene.Field(UserOutput)
+    ok = graphene.Boolean()
+    user = graphene.Field(lambda: User)
 
-    def mutate(root, info, user_data=None):
-        user = UserOutput(
-            id=user_data.id,
-            twitter_id=user_data.twitter_id,
-            user_name=user_data.user_name
-        )
-        return CreateUser(user=user)
+    def mutate(root, info, user_name,twitter_id,id):
+        user = User(user_name=user_name,twitter_id=twitter_id,id=id)
+        ok = True
+        return CreateUser(user=user, ok=ok)
+
+class User(graphene.ObjectType):
+    id =  graphene.Int()
+    twitter_id = graphene.String()
+    user_name = graphene.String()
+
+
+## 楽曲情報更新
+class CreateTrack(graphene.Mutation):
+    class Arguments:
+        track_id =  graphene.Int()
+        user_id = graphene.Int()
+
+    ok = graphene.Boolean()
+    track = graphene.Field(lambda: Track)
+
+    def mutate(root, info, track_id,user_id):
+        track = Track(track_id=track_id,user_id=user_id)
+        ok = True
+        return CreateTrack(track=track, ok=ok)
+
+class Track(graphene.ObjectType):
+    track_id =  graphene.Int()
+    user_id = graphene.Int()
+
+## 楽曲特徴量情報更新
+class CreateTrackFeature(graphene.Mutation):
+    class Arguments:
+        energy =graphene.Int()
+        danceability =graphene.Int()
+        mode =graphene.Int()
+        acousticness =graphene.Int()
+        track_id =graphene.Int()
+        user_id =graphene.Int()
+
+    ok = graphene.Boolean()
+    trackfeature = graphene.Field(lambda: Track)
+
+    def mutate(root, info, energy, danceability, mode, acousticness, track_id, user_id):
+        trackfeature = Track(energy=energy,danceability=danceability,mode=mode,acousticness=acousticness,track_id=track_id,user_id=user_id)
+        ok = True
+        return CreateTrackFeature(trackfeature=trackfeature, ok=ok)
+
+class TrackFeatrue(graphene.ObjectType):
+    energy =graphene.Int()
+    danceability =graphene.Int()
+    mode =graphene.Int()
+    acousticness =graphene.Int()
+    track_id =graphene.Int()
+    user_id =graphene.Int()
+
+class MyMutations(graphene.ObjectType):
+    create_user = CreateUser.Field()
+    create_track= CreateTrack.Field()
+    create_track_feature = CreateTrackFeature.Field()
+
 
 class Query(graphene.ObjectType):
-    all_users = graphene.List(User)
-    all_tracks = graphene.List(Track)
-    all_feature_tracks = graphene.List(FeatureTrack)
-    user = graphene.Field(UserOutput)
+    user_type = graphene.List(UserType)
+    track_type = graphene.List(TrackType)
+    featuretrack_type = graphene.List(FeatureTrackType)
+    user = graphene.Field(User)
 
-    def resolve_all_users(self, info):
-        query = User.get_query(info)  # SQLAlchemy query
+    def resolve_users(self, info):
+        query = UserType.get_query(info)  # SQLAlchemy query
         return query.all()
 
-    def resolve_all_traks(self, info):
-        query = Track.get_query(info)  # SQLAlchemy query
-        return query.all()
-        
-    def resolve_all_feature_traks(self, info):
-        query = FeatureTrack.get_query(info)  # SQLAlchemy query
+    def resolve_users(self, info):
+        query = TrackType.get_query(info)  # SQLAlchemy query
         return query.all()
 
+    def resolve_users(self, info):
+        query = FeatureTrackType.get_query(info)  # SQLAlchemy query
+        return query.all()
 
-
-class Mutation(graphene.ObjectType):
-    create_user = CreateUser.Field()
-
-schema = graphene.Schema(query=Query, mutation=Mutation)
+schema = graphene.Schema(query=Query,mutation=MyMutations)
