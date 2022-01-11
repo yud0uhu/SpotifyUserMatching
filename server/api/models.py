@@ -19,12 +19,14 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     twitter_id = Column(String)
     user_name = Column(String)
+    preference = Column(Integer)
     
 
 class Track(Base):
     __tablename__ = "tracks"
     
     track_id = Column(Integer, primary_key=True)
+    track_name = Column(String)
     # Userにrelationを張る,1ユーザーに対して1Track
     user_id = Column(Integer, ForeignKey('users.id'), primary_key=True)
     user=relationship(
