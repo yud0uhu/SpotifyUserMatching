@@ -36,6 +36,7 @@ class User(graphene.ObjectType):
     id =  graphene.Int()
     twitter_id = graphene.String()
     user_name = graphene.String()
+    preference = graphene.Int()
 
 
 ## 楽曲情報更新
@@ -43,12 +44,13 @@ class CreateTrack(graphene.Mutation):
     class Arguments:
         track_id =  graphene.Int()
         user_id = graphene.Int()
+        track_name = graphene.String()
 
     ok = graphene.Boolean()
     track = graphene.Field(lambda: Track)
 
-    def mutate(root, info, track_id,user_id):
-        track = Track(track_id=track_id,user_id=user_id)
+    def mutate(root, info, track_id, user_id, track_name):
+        track = Track(track_id=track_id,user_id=user_id,track_name=track_name)
         ok = True
         return CreateTrack(track=track, ok=ok)
 
@@ -89,8 +91,8 @@ class MyMutations(graphene.ObjectType):
 
 
 class Query(graphene.ObjectType):
-    all_users = graphene.List(User)
-    all_tracks = graphene.List(Track)
+    all_users = graphene.List(UserType)
+    all_tracks = graphene.List(TrackType)
     all_feature_tracks = graphene.List(FeatrueTrack)
     user = graphene.Field(User)
 
