@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// REST API
+// マッチユーザーのリストを取得する
 export default function SendAction(handleChangeDataState: Function) {
   const userId = 1;
   axios(`http://localhost:8000/user/${userId}`, {
