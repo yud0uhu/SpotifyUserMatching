@@ -16,7 +16,8 @@ from fastapi import APIRouter
 router = APIRouter()
 
 # FastAPIのインスタンスを作成
-app = FastAPI()
+# app = FastAPI()
+app = FastAPI(title='ContactQL', description='GraphQL Contact APIs', version='0.1')
 app.debug = True
 
 # CORSを回避するために追加
@@ -30,7 +31,6 @@ app.add_middleware(
 
 # GraphQLを提供するためのエンドポイントを定義
 
-app = FastAPI(title='ContactQL', description='GraphQL Contact APIs', version='0.1')
 @app.get("/")
 async def root():
     return {"message": "Contact Applications!"}
