@@ -46,11 +46,11 @@ def addTrackInf(query):
         
 
 # フロント側でユーザーが登録した楽曲のIDが返却されるため、その楽曲の特徴量を検索し、DBに登録する
-def postTrackFeature(user_id,track_id):
+def postTrackFeature(user_id,track_id,track_name):
     try:
         features = sp.audio_features(track_id)
         print(features[0])
-        insert_feature_track(user_id,features[0])
+        insert_feature_track(user_id,features[0],track_name)
 
     except IndexError:
         print("IndexError has occurred!")
@@ -65,7 +65,7 @@ def insert_feature_track(id,feature):
     feature_track = FeatureTrack()
 
     try:
-        track = Track(user_id=id, track_id=track_id)
+        track = Track(user_id=id, track_id=track_id, track_name=track_name)
         db_session.add(track)
 
         feature_track = FeatureTrack(energy=feature['energy'], danceability=feature['danceability'], mode=feature['mode'], acousticness=feature['acousticness'], track_id=feature['id'], user_id=id)
@@ -108,6 +108,8 @@ def select_feature_track(user_id):
 # フロント側からユーザーIDが返却されるため、そのユーザーの類似した好みを持つユーザーをすべて参照する
 # 類似したユーザーをフロントに返す
 def select_match_user(user_id):
+    match_100_user_list = []
+    match_20_user_list = []
     users = db_session.query(User).\
                 filter(User.id==user_id).\
                 all()
@@ -118,18 +120,20 @@ def select_match_user(user_id):
     all_users = db_session.query(User).\
                 filter(User.id!=user_id).\
                 all()
+
     for all_user in all_users:
-        print(all_user.preference)
+        # print(all_user.preference)
     
         # 100%マッチ
         if preference == all_user.preference:
-            print(all_user.id)
-            return all_user.id
+            # print(all_user.id)
+            match_100_user_list.append(all_user.id)
         # ?%マッチ
         elif (preference-1) < all_user.preference < preference*0.2:
-            print(all_user.id)
-            return all_user.id
-    
+            # print(all_user.id)
+            match_20_user_list.append(all_user.id)
+    return match_100_user_list, match_20_user_list
+
     
 # ユーザー固有の楽曲情報から好みを登録する
 def insert_user_preference(user_id):
@@ -151,10 +155,15 @@ def insert_user_preference(user_id):
     user_preference.preference = energy_avarage
     db_session.commit()
 
+def hogehoge() :
+    users = db_session.query(FeatureTrack.track_id).all()
+    for user in users:
+        return user
+
 if __name__ == '__main__':
     # nameをフロント側から受け取る
     track_name = "Radiohead"
 #    insert_user_preference(10)
-    select_match_user(10)
+    # select_match_user(10)
     # getTrackInf(track_name)
     # addTrackInf(track_name)
