@@ -3,7 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserList from "../molecules/UserList";
 import RankSetButton from "../atoms/RankSetButton";
 export default function SearchView(props: any) {
-  const { dataContainer, onClick, onSearch, onChange, onClear } = props;
+  const { dataContainer, onClick, onSearch, onClear, existsList } = props;
+
+  const action = existsList ? onSearch : onClear;
 
   return (
     <>
@@ -17,11 +19,11 @@ export default function SearchView(props: any) {
             オールタイムミュージックランキング
             <RankSetButton onClick={onClick} />
           </p>
-          <button className="text-xl" onClick={onSearch} type="button">
+          <button className="text-xl" onClick={action} type="button">
             <FontAwesomeIcon icon={faSearch} />
           </button>
         </div>
-      </div>{" "}
+      </div>
       <div className="bg-cover bg-gray-50">
         {dataContainer.map((dataList, index) => (
           <UserList allUsersList={dataList} key={index} />
