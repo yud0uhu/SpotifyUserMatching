@@ -98,7 +98,7 @@ def getAudioFeature(track_id):
 def select_feature_track(user_id):
     try:
         track = db_session.query(Track).\
-            filter(User.user_id==user_id).\
+            filter(Track.user_id==user_id).\
             all()
         return track
 
