@@ -13,11 +13,11 @@ def init_session(Id, twitterId, userName):
     db_session.add(user)
     db_session.commit()
 
-def insert_track(user_id, track_id, track_name, audio, cover_art):
+def insert_track(user_id, track_id):
     
     track = Track()
 
-    track = Track(user_id=user_id, track_id=track_id, track_name=track_name, audio=audio, cover_art=cover_art)
+    track = Track(user_id=user_id, track_id=track_id)
 
     db_session.add(track)
     db_session.commit()
@@ -47,14 +47,11 @@ for userName in userNameList:
         print(trackNames)
 
         track = spotify_connect.addTrackInf(trackNames)
+        print(track)
         # DBに登録する処理
         trackId=track['id']
-        trackName=track['name']
-        Audio=track['preview_url']
-        CoverArt=track['album']['images'][0]['url']
-        print(track)
 
-        insert_track(user_id=Id, track_id=trackId, track_name=trackName, audio=Audio, cover_art=CoverArt)
+        insert_track(user_id=Id, track_id=trackId)
 
         feature = spotify_connect.getAudioFeature(trackId)
         # DBに登録する処理
