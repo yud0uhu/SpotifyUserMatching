@@ -9,8 +9,6 @@ from sqlalchemy.sql.elements import True_
 
 load_dotenv()
 
-import schema
-
 from models import engine, db_session, Base, User, Track, FeatureTrack
 from sqlalchemy.sql.expression import null
 
@@ -107,8 +105,56 @@ def select_feature_track(user_id):
     except AttributeError:
         print("AttributeError has occurred!")
 
+# フロント側からユーザーIDが返却されるため、そのユーザーの類似した好みを持つユーザーをすべて参照する
+# 類似したユーザーをフロントに返す
+def select_match_user(user_id):
+    users = db_session.query(User).\
+                filter(User.id==user_id).\
+                all()
+    for user in users:
+        # print(user.preference)
+        preference = user.preference
+
+    all_users = db_session.query(User).\
+                filter(User.id!=user_id).\
+                all()
+    for all_user in all_users:
+        print(all_user.preference)
+    
+        # 100%マッチ
+        if preference == all_user.preference:
+            print(all_user.id)
+            return all_user.id
+        # ?%マッチ
+        elif (preference-1) < all_user.preference < preference*0.2:
+            print(all_user.id)
+            return all_user.id
+    
+    
+# ユーザー固有の楽曲情報から好みを登録する
+def insert_user_preference(user_id):
+    energy = 0
+    # ユーザーIDをキーに楽曲情報と特徴量をすべて取得する
+    all_feature_tracks = db_session.query(FeatureTrack.energy).\
+        filter(FeatureTrack.user_id==user_id).\
+        all()
+    for featuretrack in all_feature_tracks:
+        energy+=featuretrack.energy
+    print(energy/len(all_feature_tracks))
+    # 特徴量のうち、エネルギーの平均を出す
+    energy_avarage=energy/len(all_feature_tracks)
+
+    # ユーザーテーブルに好みを登録する
+    user_preference = db_session.query(User).\
+        filter(User.id==user_id).\
+        first()
+    user_preference.preference = energy_avarage
+    db_session.commit()
+
 if __name__ == '__main__':
     # nameをフロント側から受け取る
     track_name = "Radiohead"
+#    insert_user_preference(10)
+    select_match_user(10)
     # getTrackInf(track_name)
     # addTrackInf(track_name)
