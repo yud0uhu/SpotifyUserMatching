@@ -48,7 +48,7 @@ def addTrackInf(query):
         
 
 # フロント側でユーザーが登録した楽曲のIDが返却されるため、その楽曲の特徴量を検索し、DBに登録する
-def getTrackFeature(user_id,track_id):
+def postTrackFeature(user_id,track_id):
     try:
         features = sp.audio_features(track_id)
         print(features[0])
@@ -94,6 +94,18 @@ def getAudioFeature(track_id):
         print("AttributeError has occurred!")
 
 
+# フロント側でユーザーが登録した楽曲のIDが返却されるため、その楽曲情報をDBから参照する
+def select_feature_track(user_id):
+    try:
+        track = db_session.query(Track).\
+            filter(User.user_id==user_id).\
+            all()
+        return track
+
+    except IndexError:
+        print("IndexError has occurred!")
+    except AttributeError:
+        print("AttributeError has occurred!")
 
 if __name__ == '__main__':
     # nameをフロント側から受け取る
