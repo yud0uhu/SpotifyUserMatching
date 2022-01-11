@@ -11,26 +11,18 @@ import client from "./graphql/client";
 
 interface Props {}
 export default function App({}: Props) {
-  const [dataContainer, setDataContainer] = useState<[][]>([]);
+  // const [dataContainer, setDataContainer] = useState<[][]>([]);
   const [uniqueData, setUniqueData] = useState<[][]>([]);
 
   const handleClear = () => {
-    setDataContainer([]);
+    // setDataContainer([]);
+    console.log("Clear!");
+    setUniqueData([]);
   };
-  const handleChangeDataState = (dataList: [], param: string) => {
-    if (param === "") {
-      const newDataContainer = [...dataContainer, dataList];
+  const handleChangeDataState = (dataList: []) => {
+    const newUniqueData = [...uniqueData, dataList];
 
-      setDataContainer(newDataContainer);
-
-      console.log(param);
-    } else {
-      const newUniqueData = [...uniqueData, dataList];
-
-      setUniqueData(newUniqueData);
-
-      console.log(param);
-    }
+    setUniqueData(newUniqueData);
   };
   const handleSearch = () => {
     ApiConnection(handleChangeDataState);
@@ -57,6 +49,7 @@ export default function App({}: Props) {
                   onClick={handleClickChange}
                   onSearch={handleSearch}
                   onClear={handleClear}
+                  existsList={uniqueData.length === 0}
                 />
               }
             />
