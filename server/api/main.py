@@ -6,7 +6,7 @@ from starlette.graphql import GraphQLApp
 
 from models import db_session
 
-from schema import Query, Mutation
+from schema import Query,MyMutations
 
 from starlette.middleware.cors import CORSMiddleware 
 
@@ -29,12 +29,24 @@ app.add_middleware(
 )
 
 # GraphQLを提供するためのエンドポイントを定義
-app.add_route("/graphql", GraphQLApp(schema=graphene.Schema(query=Query, mutation=Mutation)))
+
+app = FastAPI(title='ContactQL', description='GraphQL Contact APIs', version='0.1')
+@app.get("/")
+async def root():
+    return {"message": "Contact Applications!"}
+
+app.add_route("/graphql", GraphQLApp(schema=graphene.Schema(query=Query,mutation=MyMutations)))
+
 
 @app.get("/search/{track_term}")
 async def serch_track(track_term):
     response = spotify_connect.getTrackInf(track_term)
     return response
+
+    
+@app.get("/{user_id}/ranking/{track_id}")
+async def serch_track(user_id,track_id):
+    spotify_connect.getTrackFeature(user_id,track_id)
 
 
 # APIサーバシャットダウン時にDBセッションを削除
