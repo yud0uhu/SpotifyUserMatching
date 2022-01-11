@@ -11,8 +11,6 @@ export const GET_ALLUSERS = gql`
         userId
         trackId
         trackName
-        audio
-        coverArt
         featureTracks {
           trackId
           danceability
@@ -25,44 +23,34 @@ export const GET_ALLUSERS = gql`
   }
 `;
 
-export const CREATE_USER = gql`
-  mutation createUser(
-    $userId: String!
-    $twitterId: String!
-    $userName: String!
-  ) {
-    createuser(userId: $userId, twitterId: $twitterId, userName: $userName) {
-      userId
-      twitterId
-      userName
+// export const CREATE_USER = gql`
+//   mutation createUser($userId: Int, $twitterId: String!, $userName: String!) {
+//     createuser(userId: $userId, twitterId: $twitterId, userName: $userName) {
+//       userId
+//       twitterId
+//       userName
+//     }
+//   }
+// `;
+
+export const CREATE_TRACKS = gql`
+  mutation createTrack($trackId: Int!, $userId: Int!) {
+    createTrack(userId: userId, trackId: trackId) {
+      track {
+        userId
+        trackId
+      }
+      ok
     }
   }
 `;
 
-export const CREATE_TRACKS = gql`
-  mutation createTrack(
-    $trackId: String!
-    $trackName: String!
-    $audio: String!
-    $coverArt: String!
-    $userId: String!
-  ) {
-    createTrack(
-      trackData: {
-        trackId: $trackId
-        trackName: $trackName
-        audio: $audio
-        coverArt: $coverArt
-        userId: $userId
-      }
-    ) {
-      track {
-        trackId
-        trackName
-        audio
-        coverArt
-        userId
-      }
+export const QUERY_USERS = gql`
+  query {
+    usertype {
+      id
+      userName
+      twitterId
     }
   }
 `;
