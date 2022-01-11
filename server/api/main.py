@@ -37,17 +37,23 @@ async def root():
 
 app.add_route("/graphql", GraphQLApp(schema=graphene.Schema(query=Query,mutation=MyMutations)))
 
-
+# 楽曲情報を検索
 @app.get("/search/{track_term}")
 async def serch_track(track_term):
     response = spotify_connect.getTrackInf(track_term)
     return response
 
-    
-@app.get("/{user_id}/ranking/{track_id}")
+# 楽曲情報を登録    
+@app.post("/{user_id}/ranking/{track_id}")
 async def serch_track(user_id,track_id):
     spotify_connect.getTrackFeature(user_id,track_id)
+    return "OK!"
 
+# 楽曲情報を取得  
+@app.get("/{user_id}/ranking/{track_id}")
+async def serch_track(user_id,track_id):
+    
+    return "OK!"
 
 # APIサーバシャットダウン時にDBセッションを削除
 @app.on_event("shutdown")
