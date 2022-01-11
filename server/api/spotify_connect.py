@@ -5,7 +5,16 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from dotenv import load_dotenv
 import os
 
+from sqlalchemy.sql.elements import True_
+
 load_dotenv()
+
+import schema
+
+from models import engine, db_session, Base, User, Track, FeatureTrack
+from sqlalchemy.sql.expression import null
+
+Base.metadata.create_all(bind=engine)
 
 client_id = 'b890657b5f374579a0eb78a6831ca38d'
 client_secret = 'cf38fd4f4f20463aa41e901c37130b53'
@@ -19,12 +28,6 @@ def getTrackInf(query):
         # フロント側に返す処理
         tracks = sp.search(q='track:'+query, limit=10, offset=0, type='track', market=None)["tracks"]["items"]
         return tracks
-        # for track in tracks :
-            # print('track_id    : ' + track['id'])
-            # print('track    : ' + track['name'])
-            # print('audio    : ' + track['preview_url'])
-            # print('cover art: ' + track['album']['images'][0]['url'])
-            # return track
 
     except IndexError:
         print("IndexError has occurred!")
@@ -42,6 +45,42 @@ def addTrackInf(query):
         print("IndexError has occurred!")
     except AttributeError:
         print("AttributeError has occurred!")
+        
+
+# フロント側でユーザーが登録した楽曲のIDが返却されるため、その楽曲の特徴量を検索し、DBに登録する
+def getTrackFeature(user_id,track_id):
+    try:
+        features = sp.audio_features(track_id)
+        print(features[0])
+        insert_feature_track(user_id,features[0])
+
+    except IndexError:
+        print("IndexError has occurred!")
+    except AttributeError:
+        print("AttributeError has occurred!")
+
+def insert_feature_track(id,feature):
+    track_id=feature['id']
+
+    Base.metadata.create_all(bind=engine)
+    track = Track()
+    feature_track = FeatureTrack()
+
+    try:
+        track = Track(user_id=id, track_id=track_id)
+        db_session.add(track)
+
+        feature_track = FeatureTrack(energy=feature['energy'], danceability=feature['danceability'], mode=feature['mode'], acousticness=feature['acousticness'], track_id=feature['id'], user_id=id)
+        db_session.add(feature_track)
+        
+        db_session.commit()
+        
+            
+    except:
+        db_session.rollback()
+        raise
+    finally:
+        db_session.close()
 
 # バックエンド側でDBに登録した楽曲の特徴量を検索し、DBに登録する
 def getAudioFeature(track_id):
@@ -59,5 +98,5 @@ def getAudioFeature(track_id):
 if __name__ == '__main__':
     # nameをフロント側から受け取る
     track_name = "Radiohead"
-    getTrackInf(track_name)
-    addTrackInf(track_name)
+    # getTrackInf(track_name)
+    # addTrackInf(track_name)
