@@ -57,7 +57,7 @@ class Track(graphene.ObjectType):
     user_id = graphene.Int()
 
 ## 楽曲特徴量情報更新
-class CreateTrackFeature(graphene.Mutation):
+class CreateFeatureTrack(graphene.Mutation):
     class Arguments:
         energy =graphene.Int()
         danceability =graphene.Int()
@@ -72,9 +72,9 @@ class CreateTrackFeature(graphene.Mutation):
     def mutate(root, info, energy, danceability, mode, acousticness, track_id, user_id):
         trackfeature = Track(energy=energy,danceability=danceability,mode=mode,acousticness=acousticness,track_id=track_id,user_id=user_id)
         ok = True
-        return CreateTrackFeature(trackfeature=trackfeature, ok=ok)
+        return CreateFeatureTrack(trackfeature=trackfeature, ok=ok)
 
-class TrackFeatrue(graphene.ObjectType):
+class FeatrueTrack(graphene.ObjectType):
     energy =graphene.Int()
     danceability =graphene.Int()
     mode =graphene.Int()
@@ -85,13 +85,13 @@ class TrackFeatrue(graphene.ObjectType):
 class MyMutations(graphene.ObjectType):
     create_user = CreateUser.Field()
     create_track= CreateTrack.Field()
-    create_track_feature = CreateTrackFeature.Field()
+    create_track_feature = CreateFeatureTrack.Field()
 
 
 class Query(graphene.ObjectType):
-    user_type = graphene.List(UserType)
-    track_type = graphene.List(TrackType)
-    featuretrack_type = graphene.List(FeatureTrackType)
+    all_users = graphene.List(User)
+    all_tracks = graphene.List(Track)
+    all_feature_tracks = graphene.List(FeatrueTrack)
     user = graphene.Field(User)
 
     def resolve_users(self, info):
