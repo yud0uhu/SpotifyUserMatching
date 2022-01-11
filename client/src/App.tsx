@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import Header from "./components/organisms/Header";
 import SearchView from "./components/organisms/SearchView";
-import SendAction from "./SendAction";
+// import SendAction from "./SendAction";
+import ApiConnection from "./ApiConnection";
 import SearchResultView from "./components/organisms/SearchResultView";
 import RankResultView from "./components/organisms/RankResultView";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -32,11 +33,13 @@ export default function App({}: Props) {
     }
   };
   const handleSearch = () => {
-    SendAction(handleChangeDataState, "");
+    ApiConnection(handleChangeDataState);
+    // SendAction(handleChangeDataState, "");
   };
 
   const handleClickChange = () => {
-    SendAction(handleChangeDataState, "unique");
+    ApiConnection(handleChangeDataState);
+    // SendAction(handleChangeDataState, "unique");
   };
 
   // 画面へレンダリングする要素を定義
@@ -50,7 +53,7 @@ export default function App({}: Props) {
               path="/"
               element={
                 <SearchView
-                  dataContainer={dataContainer}
+                  dataContainer={uniqueData}
                   onClick={handleClickChange}
                   onSearch={handleSearch}
                   onClear={handleClear}
