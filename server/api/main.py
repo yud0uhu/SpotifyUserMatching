@@ -45,7 +45,7 @@ async def serch_track(track_term):
 
 # 楽曲情報を登録    
 @app.post("/{user_id}/ranking/{track_id}/{track_name}")
-async def post_track(user_id,track_id):
+async def post_track(user_id,track_id,track_name):
     spotify_connect.postTrackFeature(user_id,track_id,track_name)
     # 楽曲特徴量を登録
     spotify_connect.insert_user_preference(user_id)
