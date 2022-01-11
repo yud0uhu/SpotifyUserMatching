@@ -45,14 +45,22 @@ async def serch_track(track_term):
 
 # 楽曲情報を登録    
 @app.post("/{user_id}/ranking/{track_id}")
-async def serch_track(user_id,track_id):
+async def post_track(user_id,track_id):
     spotify_connect.postTrackFeature(user_id,track_id)
     return "OK!"
 
-# 楽曲情報を取得  
+# 楽曲情報を取得
 @app.get("/{user_id}/ranking")
-async def serch_track(user_id):
+async def select_track(user_id):
     response = spotify_connect.select_feature_track(user_id)
+    # 楽曲特徴量を登録
+    spotify_connect.insert_user_preference(user_id)
+    return response
+
+# ユーザー情報を取得
+@app.get("user/{user_id}")
+async def serch_user(user_id):
+    response = spotify_connect.select_match_user(user_id)
     return response
 
 # APIサーバシャットダウン時にDBセッションを削除
