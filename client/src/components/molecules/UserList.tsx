@@ -8,29 +8,29 @@ const UserList = (props: any) => {
 
   console.log(allUsersList);
 
-  const UserCardList = allUsersList.map((allusers: any) => (
+  // const UserCardList = allUsersList[0].map((allusers: any) => (
+  //   <UserCard
+  //     userId={allusers.id}
+  //     twitterId={allusers.twitter_id}
+  //     userName={allusers.user_name}
+  //     key={allusers.id}
+  //   />
+  // ));
+
+  const MatchUser1CardList = allUsersList[0].map((allusers: any) => (
     <UserCard
       userId={allusers.id}
-      twitterId={allusers.twitterId}
-      userName={allusers.userName}
+      twitterId={allusers.twitter_id}
+      userName={allusers.user_name}
       key={allusers.id}
     />
   ));
 
-  const MatchUser1CardList = allUsersList.map((allusers: any) => (
+  const MatchUser2CardList = allUsersList[1].map((allusers: any) => (
     <UserCard
       userId={allusers.id}
-      twitterId={allusers.twitterId}
-      userName={allusers.userName}
-      key={allusers.id}
-    />
-  ));
-
-  const MatchUser2CardList = allUsersList.map((allusers: any) => (
-    <UserCard
-      userId={allusers.id}
-      twitterId={allusers.twitterId}
-      userName={allusers.userName}
+      twitterId={allusers.twitter_id}
+      userName={allusers.user_name}
       key={allusers.id}
     />
   ));
@@ -50,7 +50,7 @@ const UserList = (props: any) => {
       </div>
       <div className="bg-cover bg-gray-50">
         <div className="grid grid-cols-3 gap-4 justify-items-auto">
-          {UserCardList}
+          {MatchUser1CardList}
         </div>
       </div>
       <div className="text-center space-x-4 text-xl space-y-12">
@@ -60,7 +60,7 @@ const UserList = (props: any) => {
       </div>
       <div className="bg-cover bg-gray-50">
         <div className="grid grid-cols-3 gap-4 justify-items-auto">
-          {UserCardList}
+          {MatchUser2CardList}
         </div>
       </div>
     </>
