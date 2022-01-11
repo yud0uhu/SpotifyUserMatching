@@ -12,12 +12,12 @@ db_session = scoped_session(sessionmaker(autocommit=False,
 
 Base = declarative_base()
 Base.query = db_session.query_property()
-
+Base.metadata.create_all(bind=engine)
 
 class User(Base):
     __tablename__ = 'users'
 
-    id = Column(String, nullable=False, primary_key=True)
+    id = Column(Integer, nullable=False, primary_key=True)
     twitter_id = Column(String)
     user_name = Column(String)
     
@@ -25,12 +25,9 @@ class User(Base):
 class Track(Base):
     __tablename__ = "tracks"
     
-    track_id = Column(String, nullable=False, primary_key=True)
-    track_name=Column(String)
-    audio=Column(String)
-    cover_art=Column(String)
+    track_id = Column(Integer, primary_key=True)
     # Userにrelationを張る,1ユーザーに対して1Track
-    user_id = Column(String, ForeignKey('users.id'), primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'), primary_key=True)
     user=relationship(
         User,
         backref=backref('tracks', uselist=True, cascade='delete,all'))
@@ -38,13 +35,13 @@ class Track(Base):
 class FeatureTrack(Base):
     __tablename__ = "feature_tracks"
     
-    energy = Column(String)
-    danceability =Column(String)
-    mode =Column(String)
-    acousticness =Column(String)
+    energy = Column(Integer)
+    danceability =Column(Integer)
+    mode =Column(Integer)
+    acousticness =Column(Integer)
     # Trackにrelationを張る,1Trackに対して1特徴量データ
-    track_id = Column(String, ForeignKey('tracks.track_id'), primary_key=True)
-    user_id = Column(String, primary_key=True)
+    track_id = Column(Integer, ForeignKey('tracks.track_id'), primary_key=True)
+    user_id = Column(Integer, primary_key=True)
     tracks=relationship(
         Track,
         backref=backref('feature_tracks', uselist=True, cascade='delete,all'))
