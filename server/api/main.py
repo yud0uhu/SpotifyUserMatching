@@ -47,14 +47,14 @@ async def serch_track(track_term):
 @app.post("/{user_id}/ranking/{track_id}")
 async def post_track(user_id,track_id):
     spotify_connect.postTrackFeature(user_id,track_id)
+    # 楽曲特徴量を登録
+    spotify_connect.insert_user_preference(user_id)
     return "OK!"
 
 # 楽曲情報を取得
 @app.get("/{user_id}/ranking")
 async def select_track(user_id):
     response = spotify_connect.select_feature_track(user_id)
-    # 楽曲特徴量を登録
-    spotify_connect.insert_user_preference(user_id)
     return response
 
 # ユーザー情報を取得
