@@ -1,5 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
-import { useState } from "react";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserCard from "../atoms/UserCard";
@@ -17,7 +15,7 @@ const UserList = (props: any) => {
   //   />
   // ));
 
-  const MatchUser1CardList = allUsersList[0].map((allusers: any) => (
+  const HighMatchUserCardList = allUsersList[0].map((allusers: any) => (
     <UserCard
       userId={allusers.id}
       twitterId={allusers.twitter_id}
@@ -26,7 +24,7 @@ const UserList = (props: any) => {
     />
   ));
 
-  const MatchUser2CardList = allUsersList[1].map((allusers: any) => (
+  const MiddleMatchUserCardList = allUsersList[1].map((allusers: any) => (
     <UserCard
       userId={allusers.id}
       twitterId={allusers.twitter_id}
@@ -34,6 +32,15 @@ const UserList = (props: any) => {
       key={allusers.id}
     />
   ));
+
+  // const LowMatchUserCardList = allUsersList[2].map((allusers: any) => (
+  //   <UserCard
+  //     userId={allusers.id}
+  //     twitterId={allusers.twitter_id}
+  //     userName={allusers.user_name}
+  //     key={allusers.id}
+  //   />
+  // ));
 
   return (
     <>
@@ -50,7 +57,7 @@ const UserList = (props: any) => {
       </div>
       <div className="bg-cover bg-gray-50">
         <div className="grid grid-cols-3 gap-4 justify-items-auto">
-          {MatchUser1CardList}
+          {HighMatchUserCardList}
         </div>
       </div>
       <div className="text-center space-x-4 text-xl space-y-12">
@@ -60,7 +67,7 @@ const UserList = (props: any) => {
       </div>
       <div className="bg-cover bg-gray-50">
         <div className="grid grid-cols-3 gap-4 justify-items-auto">
-          {MatchUser2CardList}
+          {MiddleMatchUserCardList}
         </div>
       </div>
     </>

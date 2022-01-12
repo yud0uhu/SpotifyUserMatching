@@ -1,4 +1,6 @@
 import React from "react";
+import LoginButton from "../../components/atoms/LoginButton";
+import LogoutButton from "../atoms/LogoutButton";
 
 export default function Header() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -27,18 +29,24 @@ export default function Header() {
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                   href="/ranking"
                 >
-                  <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i>
-                  <span className="ml-2">My Page</span>
+                  <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75">
+                    <span className="ml-2">My Page</span>
+                  </i>
                 </a>
               </li>
               <li className="nav-item">
-                <a
-                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                  href="/logout"
-                >
-                  <i className="fab fa-pinterest text-lg leading-lg text-white opacity-75"></i>
-                  <span className="ml-2">Logout</span>
-                </a>
+                <div className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+                  <i className="fab fa-pinterest text-lg leading-lg text-white opacity-75">
+                    <span className="ml-2">{<LogoutButton />}</span>
+                  </i>
+                </div>
+              </li>
+              <li className="nav-item">
+                <div className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+                  <i className="fab fa-pinterest text-lg leading-lg text-white opacity-75">
+                    <span className="ml-2">{<LoginButton />}</span>
+                  </i>
+                </div>
               </li>
             </ul>
           </div>
