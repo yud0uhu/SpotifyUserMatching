@@ -57,7 +57,7 @@ def postTrackFeature(user_id,track_id,track_name):
     except AttributeError:
         print("AttributeError has occurred!")
 
-def insert_feature_track(id,feature):
+def insert_feature_track(id,feature,track_name):
     track_id=feature['id']
 
     Base.metadata.create_all(bind=engine)
@@ -140,6 +140,8 @@ def select_match_user(user_id):
                 all()
             for user in users:
                 match_20_user_list.append(user)
+        else:
+            pass
     return match_100_user_list, match_20_user_list
 
     
