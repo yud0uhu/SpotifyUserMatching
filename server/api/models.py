@@ -19,6 +19,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     twitter_id = Column(String)
     user_name = Column(String)
+    profile_image_url = Column(String)
     preference = Column(Integer)
     
 
@@ -27,6 +28,8 @@ class Track(Base):
     
     track_id = Column(Integer, primary_key=True)
     track_name = Column(String)
+    spotify_url = Column(Integer)
+    cover_art = Column(Integer)
     # Userにrelationを張る,1ユーザーに対して1Track
     user_id = Column(Integer, ForeignKey('users.id'), primary_key=True)
     user=relationship(

@@ -1,9 +1,11 @@
 import os
 import re
 import tweepy
-from models import engine, db_session, User
+from models import Base, engine, db_session, User
 from sqlalchemy.sql.expression import null
 from dotenv import load_dotenv
+
+Base.metadata.create_all(bind=engine)
 
 load_dotenv()
 
@@ -24,18 +26,19 @@ def init_user_login(result):
     userId = int(re.sub(r'\D', '', result['sub']))
     userInfo = api.get_user(user_id=userId)
     print(userInfo.screen_name)
-    twitter_id = userInfo.screen_name
+    twitterId = userInfo.screen_name
     userName = userInfo.name
-    
-    user = User()
+    profileImageUrl = userInfo.profile_image_url
 
-    user = User(id=userId,twitter_id=twitter_id, user_name=userName,preference=0)
+    user = User(id=userId,twitter_id=twitterId, user_name=userName, profile_image_url=profileImageUrl, preference=0)
 
     db_session.add(user)
 
+    # ユーザーIDがユニークではない時INSERTせずROLLBACK
+    
     user = db_session.query(User).\
         filter(User.id==Id).\
         session.rollback()
 
     db_session.commit()
-    return userId,userName,twitter_id
+    return userId,userName,twitterId,profileImageUrl
