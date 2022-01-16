@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginButton from "../../components/atoms/LoginButton";
 import LogoutButton from "../atoms/LogoutButton";
+import Profile from "./Profile";
 
-export default function Header() {
+export default function Header(props) {
+  const [userId, setUserId] = useState("");
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+
+  props.setuserId(userId);
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-black mb-3 ">
+        <div className="text-xs text-white">
+          <span className="ml-2">{<Profile setUserId={setUserId} />}</span>
+        </div>
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <a
@@ -16,6 +23,7 @@ export default function Header() {
               Alltime Music Matchting
             </a>
           </div>
+
           <div
             className={
               "lg:flex flex-grow items-center" +
@@ -29,23 +37,17 @@ export default function Header() {
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                   href="/ranking"
                 >
-                  <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75">
-                    <span className="ml-2">My Page</span>
-                  </i>
+                  <span className="ml-2">My Page</span>
                 </a>
               </li>
               <li className="nav-item">
                 <div className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
-                  <i className="fab fa-pinterest text-lg leading-lg text-white opacity-75">
-                    <span className="ml-2">{<LogoutButton />}</span>
-                  </i>
+                  <span className="ml-2">{<LogoutButton />}</span>
                 </div>
               </li>
               <li className="nav-item">
                 <div className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
-                  <i className="fab fa-pinterest text-lg leading-lg text-white opacity-75">
-                    <span className="ml-2">{<LoginButton />}</span>
-                  </i>
+                  <span className="ml-2">{<LoginButton />}</span>
                 </div>
               </li>
             </ul>
