@@ -14,8 +14,8 @@ from sqlalchemy.sql.expression import null
 
 Base.metadata.create_all(bind=engine)
 
-client_id = 'b890657b5f374579a0eb78a6831ca38d'
-client_secret = 'cf38fd4f4f20463aa41e901c37130b53'
+client_id = os.environ.get("SPOTIPY_CLIENT_ID")
+client_secret = os.environ.get("SPOTIPY_CLIENT_SECRET")
 
 client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials(client_id, client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
