@@ -17,3 +17,4 @@ h11
 pycparser
 pydantic
 typing-extensions
+tweepy
