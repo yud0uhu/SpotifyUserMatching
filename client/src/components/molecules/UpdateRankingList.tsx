@@ -9,7 +9,7 @@ import UpdateRankingCard from "../atoms/UpdateRankingCard";
 export default function UpdateRankingList(props: any) {
   const { userId, uniquetracks } = props;
 
-  const [track, setTrack] = useState("");
+  const [tracks, setTracks] = useState([]);
 
   console.log(userId);
 
@@ -45,13 +45,13 @@ export default function UpdateRankingList(props: any) {
           (index: number) => index
         );
         console.log("select_feature_track_response:" + trackInfoResponse);
-        setTrack(trackInfoResponse[0]);
+        setTracks(trackInfoResponse);
       })
       .catch((err) => {
         console.log("err:", err);
       });
   }, [trackId]);
-  console.log(track);
+  console.log(tracks);
 
   return (
     <>
@@ -59,13 +59,15 @@ export default function UpdateRankingList(props: any) {
       <div className="bg-cover bg-gray-50">
         <div className="grid grid-cols-3 gap-4 justify-items-auto">
           Your Favorite Songs
-          <UpdateRankingCard
-            trackId={track.track_id}
-            trackName={track.track_name}
-            audio={track.spotify_url}
-            coverArt={track.cover_art}
-            key={track.track_id}
-          />
+          {tracks.map((track) => (
+            <UpdateRankingCard
+              trackId={track.track_id}
+              trackName={track.track_name}
+              audio={track.spotify_url}
+              coverArt={track.cover_art}
+              key={track.track_id}
+            />
+          ))}
         </div>
       </div>
     </>
