@@ -6,32 +6,24 @@ const UserList = (props: any) => {
 
   console.log(allUsersList);
 
-  // const UserCardList = allUsersList[0].map((allusers: any) => (
-  //   <UserCard
-  //     userId={allusers.id}
-  //     twitterId={allusers.twitter_id}
-  //     userName={allusers.user_name}
-  //     key={allusers.id}
-  //   />
-  // ));
-
   const HighMatchUserCardList = allUsersList[0].map((allusers: any) => (
     <UserCard
       userId={allusers.id}
       twitterId={allusers.twitter_id}
       userName={allusers.user_name}
+      profileImageUrl={allusers.profile_image_url}
       key={allusers.id}
     />
   ));
 
-  const MiddleMatchUserCardList = allUsersList[1].map((allusers: any) => (
-    <UserCard
-      userId={allusers.id}
-      twitterId={allusers.twitter_id}
-      userName={allusers.user_name}
-      key={allusers.id}
-    />
-  ));
+  // const MiddleMatchUserCardList = allUsersList[1].map((allusers: any) => (
+  //   <UserCard
+  //     userId={allusers.id}
+  //     twitterId={allusers.twitter_id}
+  //     userName={allusers.user_name}
+  //     key={alluser.id}
+  //   />
+  // ));
 
   // const LowMatchUserCardList = allUsersList[2].map((allusers: any) => (
   //   <UserCard
@@ -48,7 +40,7 @@ const UserList = (props: any) => {
         <span>
           <FontAwesomeIcon icon={faCrown} />
         </span>
-        <span>USERさんと相性が合いそうなユーザー</span>
+        <span>あなたと相性が合いそうなユーザー</span>
       </div>
       <div className="text-center space-x-4 text-xl space-y-12">
         <h2 className="text-gray-500 dark:text-gray-400 text-sm leading-6 truncate">
@@ -67,7 +59,7 @@ const UserList = (props: any) => {
       </div>
       <div className="bg-cover bg-gray-50">
         <div className="grid grid-cols-3 gap-4 justify-items-auto">
-          {MiddleMatchUserCardList}
+          {/* {MiddleMatchUserCardList} */}
         </div>
       </div>
     </>

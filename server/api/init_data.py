@@ -9,7 +9,7 @@ def init_session(Id, twitterId, userName):
 
     user = User()
 
-    user = User(id=Id,twitter_id=twitterId, user_name=userName, preference=0.6332)
+    user = User(id=Id,twitter_id=twitterId, user_name=userName, profile_image_url='https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260', preference=0.6332)
 
     db_session.add(user)
     db_session.commit()

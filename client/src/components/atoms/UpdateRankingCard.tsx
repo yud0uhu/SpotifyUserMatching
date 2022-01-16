@@ -12,7 +12,7 @@ const UpdateRankingCard = (props: any) => {
           </div>
           <div className="flex flex-col justify-center">
             <img src={coverArt} alt="アルバム画像" />
-            <a href={audio}>視聴する</a>
+            <a href={audio}>Spotifyで聴く</a>
           </div>
         </div>
       </div>

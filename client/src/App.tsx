@@ -1,18 +1,20 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
 import Header from "./components/organisms/Header";
 import SearchView from "./components/organisms/SearchView";
 // import SendAction from "./SendAction";
-import ApiConnection from "./ApiConnection";
+import ApiConnection from "./api-connection";
 import SearchResultView from "./components/organisms/SearchResultView";
 import RankResultView from "./components/organisms/RankResultView";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import client from "./graphql/client";
 
-interface Props {}
-export default function App({}: Props) {
+export default function App() {
+  const [userId, setuserId] = useState("");
   // const [dataContainer, setDataContainer] = useState<[][]>([]);
   const [uniqueData, setUniqueData] = useState<[][]>([]);
+
+  console.log(userId);
 
   const handleClear = () => {
     // setDataContainer([]);
@@ -25,12 +27,12 @@ export default function App({}: Props) {
     setUniqueData(newUniqueData);
   };
   const handleSearch = () => {
-    ApiConnection(handleChangeDataState);
+    ApiConnection(userId, handleChangeDataState);
     // SendAction(handleChangeDataState, "");
   };
 
   const handleClickChange = () => {
-    ApiConnection(handleChangeDataState);
+    ApiConnection(userId, handleChangeDataState);
     // SendAction(handleChangeDataState, "unique");
   };
 
@@ -38,7 +40,7 @@ export default function App({}: Props) {
   return (
     <>
       <ApolloProvider client={client}>
-        <Header />
+        <Header setuserId={setuserId} />
         <BrowserRouter>
           <Routes>
             <Route
@@ -53,7 +55,10 @@ export default function App({}: Props) {
                 />
               }
             />
-            <Route path="/ranking" element={<RankResultView />} />
+            <Route
+              path="/ranking"
+              element={<RankResultView userId={userId} />}
+            />
             {/* DBのモックデータを初期データとして渡す */}
             {/* <Route
               path="/ranking"
@@ -65,7 +70,10 @@ export default function App({}: Props) {
                 />
               ))}
             /> */}
-            <Route path="/setting" element={<SearchResultView />} />
+            <Route
+              path="/setting"
+              element={<SearchResultView userId={userId} />}
+            />
           </Routes>
         </BrowserRouter>
       </ApolloProvider>
