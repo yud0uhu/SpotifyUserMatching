@@ -4,32 +4,22 @@ import UserCard from "../atoms/UserCard";
 const UserList = (props: any) => {
   const { allUsersList } = props;
 
-  console.log(allUsersList);
-
-  // const UserCardList = allUsersList[0].map((allusers: any) => (
-  //   <UserCard
-  //     userId={allusers.id}
-  //     twitterId={allusers.twitter_id}
-  //     userName={allusers.user_name}
-  //     key={allusers.id}
-  //   />
-  // ));
-
   const HighMatchUserCardList = allUsersList[0].map((allusers: any) => (
     <UserCard
-      userId={allusers.id}
-      twitterId={allusers.twitter_id}
-      userName={allusers.user_name}
-      key={allusers.id}
+      userId={allusers[0].id}
+      twitterId={allusers[0].twitter_id}
+      userName={allusers[0].user_name}
+      profileImageUrl={allusers[0].profile_image_url}
+      key={allusers[0].id}
     />
   ));
 
   const MiddleMatchUserCardList = allUsersList[1].map((allusers: any) => (
     <UserCard
-      userId={allusers.id}
-      twitterId={allusers.twitter_id}
-      userName={allusers.user_name}
-      key={allusers.id}
+      userId={allusers[0].id}
+      twitterId={allusers[0].twitter_id}
+      userName={allusers[0].user_name}
+      key={allusers[0].id}
     />
   ));
 

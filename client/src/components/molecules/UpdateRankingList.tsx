@@ -1,15 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UpdateRankingCard from "../atoms/UpdateRankingCard";
 
+// interface props {
+//   userId: number;
+//   uniquetracks: any;
+// }
 export default function UpdateRankingList(props: any) {
-  const { uniquetracks } = props;
+  const { userId, uniquetracks } = props;
+
+  const [track, setTrack] = useState("");
+
+  console.log(userId);
 
   if (uniquetracks === null) {
     return <div></div>;
   }
 
-  const userId = 1;
   const trackId = uniquetracks.trackId;
   const trackName = uniquetracks.trackName;
 
@@ -32,16 +39,19 @@ export default function UpdateRankingList(props: any) {
       method: "GET",
     })
       // 楽曲情報のリストを取得する
-      .then((FeatureResponse) => {
-        const featureResponse = FeatureResponse.data.map(
+      .then((TrackInfoResponse) => {
+        console.log(TrackInfoResponse.data);
+        const trackInfoResponse = TrackInfoResponse.data.map(
           (index: number) => index
         );
-        console.log(featureResponse);
+        console.log("select_feature_track_response:" + trackInfoResponse);
+        setTrack(trackInfoResponse[0]);
       })
       .catch((err) => {
         console.log("err:", err);
       });
   }, [trackId]);
+  console.log(track);
 
   return (
     <>
@@ -50,11 +60,11 @@ export default function UpdateRankingList(props: any) {
         <div className="grid grid-cols-3 gap-4 justify-items-auto">
           Your Favorite Songs
           <UpdateRankingCard
-            trackId={uniquetracks.trackId}
-            trackName={uniquetracks.trackName}
-            audio={uniquetracks.audio}
-            coverArt={uniquetracks.coverArt}
-            key={uniquetracks.trackId}
+            trackId={track.track_id}
+            trackName={track.track_name}
+            audio={track.spotify_url}
+            coverArt={track.cover_art}
+            key={track.track_id}
           />
         </div>
       </div>

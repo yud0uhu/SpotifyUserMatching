@@ -1,32 +1,18 @@
 import { useLocation } from "react-router-dom";
 import { faCrown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect } from "react";
 import RankReSetButton from "../atoms/RankReSetButton";
-import RankingList from "../molecules/RankingList";
 import UpdateRankingList from "../molecules/UpdateRankingList";
 
-export default function RankResultView(props: any) {
-  // const { uniqueData, uniqueUpdateData } = props;
-  // const [tracks, setTracks] = useState([]);
-  // console.log(uniqueData);
+export default function RankResultView(porps: any) {
+  const { userId } = porps;
 
   const location = useLocation();
 
   console.log(location.state);
 
-  // useEffect(() => {
-  //   console.log("useEffectが実行されました");
-  //   console.log(uniqueUpdateData);
-  //   setTracks(uniqueData.tracks);
-  // });
-
-  // function RankingListRender() {
-  //   return <RankingList uniquetracks={tracks} />;
-  // }
-
   function UpdateRankingListRender() {
-    return <UpdateRankingList uniquetracks={location.state} />;
+    return <UpdateRankingList userId={userId} uniquetracks={location.state} />;
   }
 
   return (
