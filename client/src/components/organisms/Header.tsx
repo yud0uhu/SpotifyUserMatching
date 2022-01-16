@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginButton from "../../components/atoms/LoginButton";
 import LogoutButton from "../atoms/LogoutButton";
 import Profile from "./Profile";
@@ -6,8 +6,8 @@ import Profile from "./Profile";
 export default function Header(props) {
   const [userId, setUserId] = useState("");
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+  useEffect(() => props.setuserId(userId), [userId, setUserId]);
 
-  props.setuserId(userId);
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-black mb-3 ">
