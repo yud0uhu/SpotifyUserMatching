@@ -21,6 +21,8 @@ from utils import VerifyToken
 
 token_auth_scheme = HTTPBearer()
 
+import re
+
 # FastAPIのインスタンスを作成
 # app = FastAPI()
 app = FastAPI(title='ContactQL', description='GraphQL Contact APIs', version='0.1')
@@ -107,9 +109,12 @@ def private_scoped(response: Response, token: str = Depends(token_auth_scheme)):
         response.status_code = status.HTTP_400_BAD_REQUEST
         return result
 
-    user_session.init_user_login(result)
+    userId,userName,twitterId = user_session.init_user_login(result)
 
-    return result
+    user_info = {}
+    user_info = {"userId":userId,"userName":userName,"twitterId":twitterId}
+
+    return user_info
 
 
 # APIサーバシャットダウン時にDBセッションを削除
