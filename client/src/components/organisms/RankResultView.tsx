@@ -3,16 +3,38 @@ import { faCrown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RankReSetButton from "../atoms/RankReSetButton";
 import UpdateRankingList from "../molecules/UpdateRankingList";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function RankResultView(porps: any) {
   const { userId } = porps;
+  const [tracks, setTracks] = useState([]);
 
-  const location = useLocation();
+  // const location = useLocation();
 
-  console.log(location.state);
+  // console.log(location.state);
+
+  useEffect(() => {
+    axios(`http://localhost:8000/${userId}/ranking`, {
+      method: "GET",
+    })
+      // 楽曲情報のリストを取得する
+      .then((TrackInfoResponse) => {
+        console.log(TrackInfoResponse.data);
+        const trackInfoResponse = TrackInfoResponse.data.map(
+          (index: number) => index
+        );
+        console.log("select_feature_track_response:" + trackInfoResponse);
+        setTracks(trackInfoResponse);
+      })
+      .catch((err) => {
+        console.log("err:", err);
+      });
+  }, [userId]);
+  console.log(tracks);
 
   function UpdateRankingListRender() {
-    return <UpdateRankingList userId={userId} uniquetracks={location.state} />;
+    return <UpdateRankingList userId={userId} uniquetracks={tracks} />;
   }
 
   return (
@@ -22,7 +44,6 @@ export default function RankResultView(porps: any) {
         オールタイムミュージックランキング
       </div>
       <div className="flex justify-center">{<RankReSetButton />}</div>
-      {/* {<RankingListRender />} */}
       {<UpdateRankingListRender />}
     </div>
   );
