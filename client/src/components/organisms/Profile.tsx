@@ -42,10 +42,6 @@ const Profile = (props) => {
   return (
     <ul>
       <NamePlate userId={users ? users["userName"] : undefined} />
-      {/* 　ようこそ、{users ? "0yu" : "undefined"}さん */}
-      {/* {users.map((user, index) => {
-        return <li key={index}>{user}</li>;
-      })} */}
     </ul>
   );
 };
