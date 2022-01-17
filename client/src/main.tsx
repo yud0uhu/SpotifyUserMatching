@@ -9,6 +9,8 @@ ReactDOM.render(
     <Auth0Provider
       domain="dev-w5l6whob.jp.auth0.com"
       clientId="MJMgiGKSWD6nomCCP213x8ScJRtPgVJ0"
+      audience="spotify-user-matching-auth"
+      scope="spotify-user-matching-admin"
       redirectUri={window.location.origin}
     >
       <App />
