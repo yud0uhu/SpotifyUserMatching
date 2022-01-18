@@ -1,7 +1,6 @@
 import RankingCard from "../atoms/RankingCard";
 export default function RankingList(props: any) {
   const { uniquetracks } = props;
-  // console.log(uniquetracks);
   const rankingCardList = uniquetracks.map((uniquetrack: any) => (
     <RankingCard
       trackId={uniquetrack.trackId}

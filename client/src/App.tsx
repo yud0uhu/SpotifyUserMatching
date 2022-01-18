@@ -1,63 +1,64 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
 import Header from "./components/organisms/Header";
 import SearchView from "./components/organisms/SearchView";
-import SendAction from "./SendAction";
+// import SendAction from "./SendAction";
+import ApiConnection from "./api-connection";
 import SearchResultView from "./components/organisms/SearchResultView";
 import RankResultView from "./components/organisms/RankResultView";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import client from "./graphql/client";
 
-interface Props {}
-export default function App({}: Props) {
-  const [dataContainer, setDataContainer] = useState<[][]>([]);
+export default function App() {
+  const [userId, setuserId] = useState("");
+  // const [dataContainer, setDataContainer] = useState<[][]>([]);
   const [uniqueData, setUniqueData] = useState<[][]>([]);
 
+  console.log(userId);
+
   const handleClear = () => {
-    setDataContainer([]);
+    // setDataContainer([]);
+    console.log("Clear!");
+    setUniqueData([]);
   };
-  const handleChangeDataState = (dataList: [], param: string) => {
-    if (param === "") {
-      const newDataContainer = [...dataContainer, dataList];
+  const handleChangeDataState = (dataList: []) => {
+    const newUniqueData = [...uniqueData, dataList];
 
-      setDataContainer(newDataContainer);
-
-      console.log(param);
-    } else {
-      const newUniqueData = [...uniqueData, dataList];
-
-      setUniqueData(newUniqueData);
-
-      console.log(param);
-    }
+    setUniqueData(newUniqueData);
   };
   const handleSearch = () => {
-    SendAction(handleChangeDataState, "");
+    ApiConnection(userId, handleChangeDataState);
+    // SendAction(handleChangeDataState, "");
   };
 
   const handleClickChange = () => {
-    SendAction(handleChangeDataState, "unique");
+    ApiConnection(userId, handleChangeDataState);
+    // SendAction(handleChangeDataState, "unique");
   };
 
   // 画面へレンダリングする要素を定義
   return (
     <>
       <ApolloProvider client={client}>
-        <Header />
+        <Header setuserId={setuserId} />
         <BrowserRouter>
           <Routes>
             <Route
               path="/"
               element={
                 <SearchView
-                  dataContainer={dataContainer}
+                  dataContainer={uniqueData}
                   onClick={handleClickChange}
                   onSearch={handleSearch}
                   onClear={handleClear}
+                  existsList={uniqueData.length === 0}
                 />
               }
             />
-            <Route path="/ranking" element={<RankResultView />} />
+            <Route
+              path="/ranking"
+              element={<RankResultView userId={userId} />}
+            />
             {/* DBのモックデータを初期データとして渡す */}
             {/* <Route
               path="/ranking"
@@ -69,7 +70,10 @@ export default function App({}: Props) {
                 />
               ))}
             /> */}
-            <Route path="/setting" element={<SearchResultView />} />
+            <Route
+              path="/setting"
+              element={<SearchResultView userId={userId} />}
+            />
           </Routes>
         </BrowserRouter>
       </ApolloProvider>

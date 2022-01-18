@@ -1,56 +1,73 @@
-// import { useMutation } from "@apollo/client";
-// import { CREATE_TRACKS } from "../../graphql/query";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import UpdateRankingCard from "../atoms/UpdateRankingCard";
 
+// interface props {
+//   userId: number;
+//   uniquetracks: any;
+// }
 export default function UpdateRankingList(props: any) {
-  const { uniquetracks } = props;
+  const { userId, uniquetracks } = props;
+
+  const [tracks, setTracks] = useState([]);
+
+  console.log(userId);
 
   if (uniquetracks === null) {
     return <div></div>;
   }
 
-  // const { uniquetracks, userId, trackId, trackName, audio, coverArt } = props;
+  const trackId = uniquetracks.trackId;
+  const trackName = uniquetracks.trackName;
 
-  // const [createTracks, { data, loading, error }] = useMutation(CREATE_TRACKS);
-  // if (loading) return <div>"Submitting..."</div>;
-  // if (error) return <div>`Submission error! ${error.message}`</div>;
+  // uniquetracksは配列にし、順々に追加したい
+  // 1. DBを更新する(ここではユニークなキーとしてIDを渡すこと)
+  useEffect(() => {
+    axios(`http://localhost:8000/${userId}/ranking/${trackId}/${trackName}`, {
+      method: "POST",
+    })
+      .then((FeatureResponse) => {
+        console.log(FeatureResponse);
+      })
+      .catch((err) => {
+        console.log("err:", err);
+      });
+  }, [trackId]);
 
-  // // APIにデータを返す
-  // createTracks({
-  //   variables: {
-  //     userId: uniquetracks.userId,
-  //     trackId: uniquetracks.trackId,
-  //     trackName: uniquetracks.trackName,
-  //     audio: uniquetracks.audio,
-  //     coverArt: uniquetracks.coverArt,
-  //   },
-  // });
-
-  // console.log(data);
-
-  // const updateRankingCardList = uniquetracks.map((uniquetrack: any) => (
-  //   <UpdateRankingCard
-  //     trackId={uniquetrack.trackId}
-  //     trackName={uniquetrack.trackName}
-  //     audio={uniquetrack.audio}
-  //     coverArt={uniquetrack.coverArt}
-  //     key={uniquetrack.trackId}
-  //   />
-  // ));
+  useEffect(() => {
+    axios(`http://localhost:8000/${userId}/ranking`, {
+      method: "GET",
+    })
+      // 楽曲情報のリストを取得する
+      .then((TrackInfoResponse) => {
+        console.log(TrackInfoResponse.data);
+        const trackInfoResponse = TrackInfoResponse.data.map(
+          (index: number) => index
+        );
+        console.log("select_feature_track_response:" + trackInfoResponse);
+        setTracks(trackInfoResponse);
+      })
+      .catch((err) => {
+        console.log("err:", err);
+      });
+  }, [trackId]);
+  console.log(tracks);
 
   return (
     <>
       <div className="text-center space-x-4 text-xl space-y-12"></div>
       <div className="bg-cover bg-gray-50">
         <div className="grid grid-cols-3 gap-4 justify-items-auto">
-          {/* {updateRankingCardList} */}
-          <UpdateRankingCard
-            trackId={uniquetracks.trackId}
-            trackName={uniquetracks.trackName}
-            audio={uniquetracks.audio}
-            coverArt={uniquetracks.coverArt}
-            key={uniquetracks.trackId}
-          />
+          Your Favorite Songs
+          {tracks.map((track) => (
+            <UpdateRankingCard
+              trackId={track.track_id}
+              trackName={track.track_name}
+              audio={track.spotify_url}
+              coverArt={track.cover_art}
+              key={track.track_id}
+            />
+          ))}
         </div>
       </div>
     </>
