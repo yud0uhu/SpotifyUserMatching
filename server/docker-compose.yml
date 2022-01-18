@@ -1,9 +1,8 @@
 version: "3"
 
 services:
-  # FastAPI
   api:
-    container_name: "fast_api"
+    container_name: spotify-user-matching-server
     build: ./docker/uvicorn
     restart: always
     tty: true
