@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  frontend:
+    image: public.ecr.aws/b6w3b5r6/all-time-music-ranking-client:latest
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    command: sh -c "npm install && npm run dev"
+    tty: true
+    volumes:
+      - ./client:/client
+    ports:
+      - "3000:3000"
+
+  api:
+    image: public.ecr.aws/b6w3b5r6/all-time-music-ranking-server:latest
+    build:
+      context: ./server
+      dockerfile: ./docker/uvicorn/Dockerfile
+    command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    tty: true
+    volumes:
+      - ./server:/usr/src/
+    ports:
+      - 8004:8000
