@@ -10,7 +10,7 @@ import { ApolloProvider } from "@apollo/client";
 import client from "./graphql/client";
 
 export default function App() {
-  const [userId, setuserId] = useState("");
+  const [userId, setuserId] = useState(0);
   // const [dataContainer, setDataContainer] = useState<[][]>([]);
   const [uniqueData, setUniqueData] = useState<[][]>([]);
 
