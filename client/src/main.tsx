@@ -9,6 +9,7 @@ ReactDOM.render(
     <Auth0Provider
       domain={process.env.REACT_APP_AUTH0_DOMAIN!}
       clientId={process.env.REACT_APP_AUTH0_CLIENT_ID!}
+      audience={process.env.REACT_APP_AUTH0_AUDIENCE!}
       scope={process.env.REACT_APP_AUTH0_SCOPE!}
       redirectUri={window.location.origin}
     >
