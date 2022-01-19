@@ -7,10 +7,10 @@ import { Auth0Provider } from "@auth0/auth0-react";
 ReactDOM.render(
   <React.StrictMode>
     <Auth0Provider
-      domain="dev-w5l6whob.jp.auth0.com"
-      clientId="MJMgiGKSWD6nomCCP213x8ScJRtPgVJ0"
-      audience="spotify-user-matching-auth"
-      scope="spotify-user-matching-admin"
+      domain={process.env.REACT_APP_AUTH0_DOMAIN!}
+      clientId={process.env.REACT_APP_AUTH0_CLIENT_ID!}
+      audience={process.env.REACT_APP_AUTH0_AUDIENCE!}
+      scope={process.env.REACT_APP_AUTH0_SCOPE!}
       redirectUri={window.location.origin}
     >
       <App />
