@@ -4,9 +4,6 @@ import "./index.css";
 import App from "./App";
 import { Auth0Provider } from "@auth0/auth0-react";
 
-const API_KEY = import.meta.env.REACT_APP_AUTH0_DOMAIN;
-console.log(API_KEY);
-
 ReactDOM.render(
   <React.StrictMode>
     <Auth0Provider
