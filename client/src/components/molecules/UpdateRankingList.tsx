@@ -59,7 +59,7 @@ export default function UpdateRankingList(props: any) {
       <div className="bg-cover bg-gray-50">
         <div className="grid grid-cols-3 gap-4 justify-items-auto">
           Your Favorite Songs
-          {tracks.map((track) => (
+          {tracks.map((track: any) => (
             <UpdateRankingCard
               trackId={track.track_id}
               trackName={track.track_name}

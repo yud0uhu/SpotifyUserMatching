@@ -5,13 +5,13 @@ export default function SeacrchResultList(props: any) {
   const { userId, trackTerm } = props;
   const [albumTrack, setAlbumTrack] = useState([]);
 
-  const trackPreview = (trackTerm) => {
+  const trackPreview = (trackTerm: number) => {
     axios(`http://localhost:8000/search/${trackTerm}`, {
       method: "GET",
     })
       .then((AlbumResponse) => {
         const albumResponse = AlbumResponse.data.map((index: number) => index);
-        const alubums = albumResponse.map((alubum) => alubum);
+        const alubums = albumResponse.map((alubum: number) => alubum);
         console.log(alubums);
         setAlbumTrack(alubums);
       })
