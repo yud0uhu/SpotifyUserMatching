@@ -4,8 +4,8 @@ import NamePlate from "../atoms/NamePlate";
 
 const Profile = (props: any) => {
   const opts = {
-    audience: "spotify-user-matching-auth",
-    scope: "spotify-user-matching-admin",
+    audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+    scope: import.meta.env.VITE_AUTH0_SCOPE,
   };
   const { loginWithRedirect, getAccessTokenWithPopup } = useAuth0();
   const {
