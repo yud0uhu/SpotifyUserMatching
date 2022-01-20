@@ -1,17 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import SearchResulutCard from "../atoms/SearchResulutCard";
-export default function SeacrchResultList(props: any) {
+export default function SeacrchResultList(props: number) {
   const { userId, trackTerm } = props;
   const [albumTrack, setAlbumTrack] = useState([]);
 
   const trackPreview = (trackTerm: number) => {
-    axios(
-      `http://http://ec2-54-82-215-43.compute-1.amazonaws.com/search/${trackTerm}`,
-      {
-        method: "GET",
-      }
-    )
+    axios(`http://localhost:8001/search/${trackTerm}`, {
+      method: "GET",
+    })
       .then((AlbumResponse) => {
         const albumResponse = AlbumResponse.data.map((index: number) => index);
         const alubums = albumResponse.map((alubum: number) => alubum);
