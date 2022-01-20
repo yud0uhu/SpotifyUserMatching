@@ -13,7 +13,10 @@ const Profile = (props) => {
     error,
     refresh,
     data: users,
-  } = useApi("http://localhost:8000/api/private-scoped", opts);
+  } = useApi(
+    "http://http://ec2-54-82-215-43.compute-1.amazonaws.com/api/private-scoped",
+    opts
+  );
 
   console.log(users);
 

@@ -6,9 +6,12 @@ export default function SeacrchResultList(props: any) {
   const [albumTrack, setAlbumTrack] = useState([]);
 
   const trackPreview = (trackTerm: number) => {
-    axios(`http://localhost:8000/search/${trackTerm}`, {
-      method: "GET",
-    })
+    axios(
+      `http://http://ec2-54-82-215-43.compute-1.amazonaws.com/search/${trackTerm}`,
+      {
+        method: "GET",
+      }
+    )
       .then((AlbumResponse) => {
         const albumResponse = AlbumResponse.data.map((index: number) => index);
         const alubums = albumResponse.map((alubum: number) => alubum);

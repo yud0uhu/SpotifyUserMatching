@@ -6,7 +6,7 @@ export default function SendAction(
   handleChangeDataState: Function
 ) {
   // const userId = 1;
-  axios(`http://localhost:8000/user/${userId}`, {
+  axios(`http://ec2-54-82-215-43.compute-1.amazonaws.com/user/${userId}`, {
     method: "GET",
   })
     .then((UserResponse) => {
