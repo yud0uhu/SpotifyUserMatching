@@ -6,7 +6,10 @@ import UpdateRankingList from "../molecules/UpdateRankingList";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function RankResultView(porps: number) {
+type Props = {
+  userId: number;
+};
+export default function RankResultView(porps: Props) {
   const { userId } = porps;
   const [tracks, setTracks] = useState([]);
 

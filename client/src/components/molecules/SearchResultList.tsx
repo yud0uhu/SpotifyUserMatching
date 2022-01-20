@@ -1,11 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import SearchResulutCard from "../atoms/SearchResulutCard";
-export default function SeacrchResultList(props: number) {
+type Props = {
+  userId: number;
+  trackTerm: string;
+};
+export default function SeacrchResultList(props: Props) {
   const { userId, trackTerm } = props;
   const [albumTrack, setAlbumTrack] = useState([]);
 
-  const trackPreview = (trackTerm: number) => {
+  const trackPreview = (trackTerm: string) => {
     axios(`http://localhost:8001/search/${trackTerm}`, {
       method: "GET",
     })

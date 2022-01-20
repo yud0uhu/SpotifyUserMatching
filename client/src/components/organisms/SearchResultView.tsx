@@ -4,13 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SearchResultList from "../molecules/SearchResultList";
 
-interface props {
+type Props = {
   userId: number;
-}
-export default function SearchResultView(userId: number) {
+  trackTerm: string;
+};
+export default function SearchResultView(userId: Props) {
   const [trackTerm, setTrackTerm] = useState<string>("");
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     setTrackTerm(() => e.target.value);
     console.log(e.target.value);
   };

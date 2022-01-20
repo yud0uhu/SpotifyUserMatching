@@ -25,7 +25,7 @@ export default function SearchView(props: any) {
         </div>
       </div>
       <div className="bg-cover bg-gray-50">
-        {dataContainer.map((dataList, index) => (
+        {dataContainer.map((dataList: [], index: number) => (
           <UserList allUsersList={dataList} key={index} />
         ))}
       </div>
