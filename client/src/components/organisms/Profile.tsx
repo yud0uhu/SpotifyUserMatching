@@ -3,8 +3,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = (props: any) => {
   const opts = {
-    audience: import.meta.env.VITE_AUTH0_AUDIENCE,
-    scope: import.meta.env.VITE_AUTH0_SCOPE,
+    audience: "spotify-user-matching-auth",
+    scope: "spotify-user-matching-admin",
   };
   const { loginWithRedirect, getAccessTokenWithPopup } = useAuth0();
   const {
