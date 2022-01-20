@@ -2,7 +2,7 @@ import { useApi } from "../../use-api";
 import { useAuth0 } from "@auth0/auth0-react";
 import NamePlate from "../atoms/NamePlate";
 
-const Profile = (props) => {
+const Profile = (props: any) => {
   const opts = {
     audience: "spotify-user-matching-auth",
     scope: "spotify-user-matching-admin",
@@ -13,10 +13,7 @@ const Profile = (props) => {
     error,
     refresh,
     data: users,
-  } = useApi(
-    "http://http://ec2-54-82-215-43.compute-1.amazonaws.com/api/private-scoped",
-    opts
-  );
+  } = useApi("http://localhost:8001/api/private-scoped", opts);
 
   console.log(users);
 
@@ -43,9 +40,9 @@ const Profile = (props) => {
     return <div>Oops {error}</div>;
   }
   return (
-    <ul>
-      <NamePlate userId={users ? users["userName"] : undefined} />
-    </ul>
+    <div>
+      <ul>　ようこそ、{users ? users["userName"] : "undefined"}さん</ul>
+    </div>
   );
 };
 export default Profile;
