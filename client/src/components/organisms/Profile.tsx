@@ -1,6 +1,5 @@
 import { useApi } from "../../use-api";
 import { useAuth0 } from "@auth0/auth0-react";
-import NamePlate from "../atoms/NamePlate";
 
 const Profile = (props: any) => {
   const opts = {
