@@ -171,6 +171,8 @@ def select_match_user(user_id):
 # ユーザー固有の楽曲情報から好みを登録する
 def insert_user_preference(user_id):
     energy = 0
+    danceability = 0
+    mode = 0
     # ユーザーIDをキーに楽曲情報と特徴量をすべて取得する
     all_feature_tracks = db_session.query(FeatureTrack).\
         filter(FeatureTrack.user_id==user_id).\
@@ -178,14 +180,18 @@ def insert_user_preference(user_id):
     # all_feature_tracks = db_session.query(FeatureTrack).all()
     for featuretrack in all_feature_tracks:
         energy+=featuretrack.energy
+        danceability+=featuretrack.danceability
+        mode+=featuretrack.mode
     # print(energy/len(all_feature_tracks))
     # 特徴量のうち、エネルギーの平均を出す
-    # energy_avarage=energy/len(all_feature_tracks)
-    energy_avarage=energy/10
+    energy_avarage=energy/len(all_feature_tracks)
+    danceability_avarage=energy/len(all_feature_tracks)
+    mode_avarage=energy/len(all_feature_tracks)
+    preference = energy_avarage + danceability_avarage + mode_avarage / 3
 
     # ユーザーテーブルに好みを登録する
     user = db_session.query(User).filter(User.id==user_id).first()
-    user.preference=energy_avarage
+    user.preference=preference
     # db_session.query(User).get(user_id).preference = energy_avarage
 
     db_session.commit()
