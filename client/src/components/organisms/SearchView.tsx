@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserList from "../molecules/UserList";
 import RankSetButton from "../atoms/RankSetButton";
 type Props = {
-  dataContainer: (event: React.MouseEvent<HTMLInputElement>) => void;
-  onClick: (event: React.MouseEvent<HTMLInputElement>) => void;
-  onSearch: (event: React.MouseEvent<HTMLInputElement>) => void;
-  onClear: (event: React.MouseEvent<HTMLInputElement>) => void;
+  dataContainer: [][];
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onSearch: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClear: (event: React.MouseEvent<HTMLButtonElement>) => void;
   existsList: boolean;
 };
 export default function SearchView(props: Props) {

@@ -2,7 +2,7 @@ import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserCard from "../atoms/UserCard";
 type Props = {
-  allUsersList: string;
+  allUsersList: [][];
 };
 const UserList = (props: Props) => {
   const { allUsersList } = props;
