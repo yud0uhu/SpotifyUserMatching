@@ -72,7 +72,7 @@ export default function App() {
             /> */}
             <Route
               path="/setting"
-              element={<SearchResultView userId={userId} />}
+              element={<SearchResultView userId={userId ? userId : 0} />}
             />
           </Routes>
         </BrowserRouter>

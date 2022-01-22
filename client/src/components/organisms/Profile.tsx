@@ -3,8 +3,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = (props: any) => {
   const opts = {
-    audience: import.meta.env.VITE_AUTH0_AUDIENCE,
-    scope: import.meta.env.VITE_AUTH0_SCOPE,
+    audience: "spotify-user-matching-auth",
+    scope: "spotify-user-matching-admin",
   };
   const { loginWithRedirect, getAccessTokenWithPopup } = useAuth0();
   const {
@@ -12,7 +12,10 @@ const Profile = (props: any) => {
     error,
     refresh,
     data: users,
-  } = useApi("http://localhost:8001/api/private-scoped", opts);
+  } = useApi(
+    "http://ec2-54-82-215-43.compute-1.amazonaws.com:8001/api/private-scoped",
+    opts
+  );
 
   console.log(users);
 

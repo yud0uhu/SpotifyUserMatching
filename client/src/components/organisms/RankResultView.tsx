@@ -6,7 +6,10 @@ import UpdateRankingList from "../molecules/UpdateRankingList";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function RankResultView(porps: number) {
+type Props = {
+  userId: number;
+};
+export default function RankResultView(porps: Props) {
   const { userId } = porps;
   const [tracks, setTracks] = useState([]);
 
@@ -15,9 +18,12 @@ export default function RankResultView(porps: number) {
   // console.log(location.state);
 
   useEffect(() => {
-    axios(`http://localhost:8001/${userId}/ranking`, {
-      method: "GET",
-    })
+    axios(
+      `http://ec2-54-82-215-43.compute-1.amazonaws.com:8001/${userId}/ranking`,
+      {
+        method: "GET",
+      }
+    )
       // 楽曲情報のリストを取得する
       .then((TrackInfoResponse) => {
         console.log(TrackInfoResponse.data);
