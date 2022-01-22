@@ -1,6 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
-import UpdateRankingList from "../molecules/UpdateRankingList";
-import RankResultView from "../organisms/RankResultView";
+import { useNavigate } from "react-router-dom";
 export default function UpdateButton(props: any) {
   const navigate = useNavigate();
   const { userId, trackId, trackName, audio, coverArt } = props;

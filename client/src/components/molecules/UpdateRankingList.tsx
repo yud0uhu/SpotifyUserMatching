@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import UpdateRankingCard from "../atoms/UpdateRankingCard";
+import { useLocation } from "react-router-dom";
 
-// interface props {
-//   userId: number;
-//   uniquetracks: any;
-// }
-export default function UpdateRankingList(props: any) {
-  const { userId, uniquetracks } = props;
+type Props = {
+  userId: number;
+};
+export default function UpdateRankingList(props: Props) {
+  const { userId } = props;
+  const params = useLocation();
+
+  console.log(params.state);
 
   const [tracks, setTracks] = useState([]);
 
-  console.log(userId);
+  const uniquetracks: any = params.state;
+  console.log(uniquetracks);
 
   if (uniquetracks === null) {
     return <div></div>;
@@ -19,6 +23,9 @@ export default function UpdateRankingList(props: any) {
 
   const trackId = uniquetracks.trackId;
   const trackName = uniquetracks.trackName;
+
+  console.log(trackId);
+  console.log(trackName);
 
   // uniquetracksは配列にし、順々に追加したい
   // 1. DBを更新する(ここではユニークなキーとしてIDを渡すこと)

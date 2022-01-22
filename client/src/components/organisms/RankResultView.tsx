@@ -11,7 +11,7 @@ type Props = {
 };
 export default function RankResultView(porps: Props) {
   const { userId } = porps;
-  const [tracks, setTracks] = useState([]);
+  const [tracks, setTracks] = useState({});
 
   // const location = useLocation();
 
@@ -27,11 +27,10 @@ export default function RankResultView(porps: Props) {
       // 楽曲情報のリストを取得する
       .then((TrackInfoResponse) => {
         console.log(TrackInfoResponse.data);
-        const trackInfoResponse = TrackInfoResponse.data.map(
-          (index: number) => index
+        const trackInfoResponse = TrackInfoResponse.data.map((index: number) =>
+          setTracks(trackInfoResponse[index])
         );
         console.log("select_feature_track_response:" + trackInfoResponse);
-        setTracks(trackInfoResponse);
       })
       .catch((err) => {
         console.log("err:", err);
@@ -40,7 +39,7 @@ export default function RankResultView(porps: Props) {
   console.log(tracks);
 
   function UpdateRankingListRender() {
-    return <UpdateRankingList userId={userId} uniquetracks={tracks} />;
+    return <UpdateRankingList userId={userId} />;
   }
 
   return (
