@@ -1,7 +1,10 @@
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserCard from "../atoms/UserCard";
-const UserList = (props: any) => {
+type Props = {
+  allUsersList: string;
+};
+const UserList = (props: Props) => {
   const { allUsersList } = props;
 
   console.log(allUsersList);

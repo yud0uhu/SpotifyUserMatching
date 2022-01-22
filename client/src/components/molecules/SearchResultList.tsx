@@ -1,7 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import SearchResulutCard from "../atoms/SearchResulutCard";
-export default function SeacrchResultList(props: any) {
+type Props = {
+  userId: number;
+  trackTerm: string;
+};
+export default function SeacrchResultList(props: Props) {
   const { userId, trackTerm } = props;
   const [albumTrack, setAlbumTrack] = useState([]);
 

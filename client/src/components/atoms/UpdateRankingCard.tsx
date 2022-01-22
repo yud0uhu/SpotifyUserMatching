@@ -1,4 +1,10 @@
-const UpdateRankingCard = (props: any) => {
+type Props = {
+  trackId: number;
+  trackName: string;
+  audio: string;
+  coverArt: string;
+};
+const UpdateRankingCard = (props: Props) => {
   const { trackId, trackName, audio, coverArt } = props;
 
   return (

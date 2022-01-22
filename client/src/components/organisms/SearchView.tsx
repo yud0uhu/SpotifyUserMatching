@@ -2,7 +2,14 @@ import { faCrown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserList from "../molecules/UserList";
 import RankSetButton from "../atoms/RankSetButton";
-export default function SearchView(props: any) {
+type Props = {
+  dataContainer: (event: React.MouseEvent<HTMLInputElement>) => void;
+  onClick: (event: React.MouseEvent<HTMLInputElement>) => void;
+  onSearch: (event: React.MouseEvent<HTMLInputElement>) => void;
+  onClear: (event: React.MouseEvent<HTMLInputElement>) => void;
+  existsList: boolean;
+};
+export default function SearchView(props: Props) {
   const { dataContainer, onClick, onSearch, onClear, existsList } = props;
 
   const action = existsList ? onSearch : onClear;
