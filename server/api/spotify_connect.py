@@ -25,7 +25,7 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 def getTrackInf(query):
     try:
         # フロント側に返す処理
-        tracks = sp.search(q='track:'+query, limit=10, offset=0, type='track', market=1974)["tracks"]["items"]
+        tracks = sp.search(q='track:'+query, limit=10, offset=0, type='track', market='JP')["tracks"]["items"]
         return tracks
 
     except IndexError:
