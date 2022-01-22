@@ -19,7 +19,7 @@ client_id = os.environ.get("SPOTIPY_CLIENT_ID")
 client_secret = os.environ.get("SPOTIPY_CLIENT_SECRET")
 
 client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials(client_id, client_secret)
-sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager,language="ja")
 
 # フロント側のユーザーの検索に対して楽曲情報を渡す
 def getTrackInf(query):
