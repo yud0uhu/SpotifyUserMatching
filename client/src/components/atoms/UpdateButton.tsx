@@ -1,5 +1,12 @@
 import { useNavigate } from "react-router-dom";
-export default function UpdateButton(props: any) {
+type Props = {
+  userId: number;
+  trackId: number;
+  trackName: string;
+  audio: string;
+  coverArt: string;
+};
+export default function UpdateButton(props: Props) {
   const navigate = useNavigate();
   const { userId, trackId, trackName, audio, coverArt } = props;
 
