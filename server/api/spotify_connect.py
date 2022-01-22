@@ -19,13 +19,13 @@ client_id = os.environ.get("SPOTIPY_CLIENT_ID")
 client_secret = os.environ.get("SPOTIPY_CLIENT_SECRET")
 
 client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials(client_id, client_secret)
-sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager,language="ja")
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # フロント側のユーザーの検索に対して楽曲情報を渡す
 def getTrackInf(query):
     try:
         # フロント側に返す処理
-        tracks = sp.search(q='track:'+query, limit=10, offset=0, type='track', market=None)["tracks"]["items"]
+        tracks = sp.search(q='track:'+query, limit=10, offset=0, type='track', market=1974)["tracks"]["items"]
         return tracks
 
     except IndexError:
