@@ -1,4 +1,10 @@
-export default function UserCard(props: any) {
+type Props = {
+  userId: number;
+  twitterId: string;
+  userName: string;
+  profileImageUrl: string;
+};
+export default function UserCard(props: Props) {
   const { userId, twitterId, userName, profileImageUrl } = props;
 
   console.log(userId);
