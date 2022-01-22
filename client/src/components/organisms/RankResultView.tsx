@@ -18,9 +18,12 @@ export default function RankResultView(porps: Props) {
   // console.log(location.state);
 
   useEffect(() => {
-    axios(`http://localhost:8001/${userId}/ranking`, {
-      method: "GET",
-    })
+    axios(
+      `http://ec2-54-82-215-43.compute-1.amazonaws.com:8001/${userId}/ranking`,
+      {
+        method: "GET",
+      }
+    )
       // 楽曲情報のリストを取得する
       .then((TrackInfoResponse) => {
         console.log(TrackInfoResponse.data);
