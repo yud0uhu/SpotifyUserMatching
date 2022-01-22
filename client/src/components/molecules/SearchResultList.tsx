@@ -9,9 +9,9 @@ export default function SeacrchResultList(props: Props) {
   const { userId, trackTerm } = props;
   const [albumTrack, setAlbumTrack] = useState([]);
 
-  const trackPreview = (trackTerm: number) => {
+  const trackPreview = (trackTerm: string) => {
     axios(
-      `http://http://ec2-54-82-215-43.compute-1.amazonaws.com/search/${trackTerm}`,
+      `http://ec2-54-82-215-43.compute-1.amazonaws.com:8001/search/${trackTerm}`,
       {
         method: "GET",
       }

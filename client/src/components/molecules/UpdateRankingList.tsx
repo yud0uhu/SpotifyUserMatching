@@ -24,7 +24,7 @@ export default function UpdateRankingList(props: any) {
   // 1. DBを更新する(ここではユニークなキーとしてIDを渡すこと)
   useEffect(() => {
     axios(
-      `http://http://ec2-54-82-215-43.compute-1.amazonaws.com/${userId}/ranking/${trackId}/${trackName}`,
+      `http://ec2-54-82-215-43.compute-1.amazonaws.com:8001/${userId}/ranking/${trackId}/${trackName}`,
       {
         method: "POST",
       }
@@ -39,7 +39,7 @@ export default function UpdateRankingList(props: any) {
 
   useEffect(() => {
     axios(
-      `http://http://ec2-54-82-215-43.compute-1.amazonaws.com/${userId}/ranking`,
+      `http://ec2-54-82-215-43.compute-1.amazonaws.com:8001/${userId}/ranking`,
       {
         method: "GET",
       }

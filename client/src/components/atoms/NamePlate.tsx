@@ -1,6 +1,6 @@
 import App from "../../App";
 
-const NamePlate = (props: number) => {
+const NamePlate = (props: any) => {
   const userId = props;
   <App />;
 

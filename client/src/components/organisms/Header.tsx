@@ -4,7 +4,7 @@ import LogoutButton from "../atoms/LogoutButton";
 import Profile from "./Profile";
 
 export default function Header(props: any) {
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(0);
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   useEffect(() => props.setuserId(userId), [userId, setUserId]);
 

@@ -6,7 +6,10 @@ import UpdateRankingList from "../molecules/UpdateRankingList";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function RankResultView(porps: any) {
+type Props = {
+  userId: number;
+};
+export default function RankResultView(porps: Props) {
   const { userId } = porps;
   const [tracks, setTracks] = useState([]);
 
@@ -16,7 +19,7 @@ export default function RankResultView(porps: any) {
 
   useEffect(() => {
     axios(
-      `http://http://ec2-54-82-215-43.compute-1.amazonaws.com/${userId}/ranking`,
+      `http://ec2-54-82-215-43.compute-1.amazonaws.com:8001/${userId}/ranking`,
       {
         method: "GET",
       }
