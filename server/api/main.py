@@ -111,7 +111,6 @@ def private_scoped(response: Response, token: str = Depends(token_auth_scheme)):
 
     userId,userName,twitterId,profile_image_url = user_session.init_user_login(result)
 
-    user_info = {}
     user_info = {"userId":userId,"userName":userName,"twitterId":twitterId,"profileImageUrl":profile_image_url}
 
     return user_info

@@ -23,6 +23,7 @@ api = tweepy.API(auth)
 def init_user_login(result):
 
     Id = result['iat']
+    print(Id)
     userId = int(re.sub(r'\D', '', result['sub']))
     userInfo = api.get_user(user_id=userId)
     print(userInfo.screen_name)
