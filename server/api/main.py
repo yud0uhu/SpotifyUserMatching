@@ -103,6 +103,8 @@ def private_scoped(response: Response, token: str = Depends(token_auth_scheme)):
     this route
     """
 
+    print("connect!")
+
     result = VerifyToken(token.credentials, scopes="read:messages").verify()
     print(result)
 
