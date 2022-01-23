@@ -36,9 +36,9 @@ def init_user_login(result):
 
     # ユーザーIDがユニークではない時INSERTせずROLLBACK
     
-    # user = db_session.query(User).\
-    #     filter(User.id==Id).\
-    #     session.rollback()
+    user = db_session.query(User).\
+        filter(User.id==Id).\
+        session.rollback()
 
     db_session.commit()
     return userId,userName,twitterId,profileImageUrl
