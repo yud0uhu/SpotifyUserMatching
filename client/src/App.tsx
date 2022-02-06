@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback, useContext } from "react";
-import Header from "./components/organisms/Header";
-import SearchView from "./components/organisms/SearchView";
+import Header from "./views/components/organisms/Header";
+import SearchView from "./views/components/organisms/SearchView";
 // import SendAction from "./SendAction";
 import ApiConnection from "./api-connection";
-import SearchResultView from "./components/organisms/SearchResultView";
-import RankResultView from "./components/organisms/RankResultView";
+import SearchResultView from "./views/components/organisms/SearchResultView";
+import RankResultView from "./views/components/organisms/RankResultView";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import client from "./graphql/client";

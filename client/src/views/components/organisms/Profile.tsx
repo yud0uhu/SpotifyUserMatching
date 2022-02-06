@@ -1,4 +1,4 @@
-import { useApi } from "../../use-api";
+import { useApi } from "../../../use-api";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = (props: any) => {
@@ -12,7 +12,7 @@ const Profile = (props: any) => {
     error,
     refresh,
     data: users,
-  } = useApi("http://localhost:8001/private-scoped", opts);
+  } = useApi("http://localhost:8000/private-scoped", opts);
 
   console.log(users);
 

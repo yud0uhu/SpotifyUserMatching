@@ -30,7 +30,7 @@ export default function UpdateRankingList(props: Props) {
   // uniquetracksは配列にし、順々に追加したい
   // 1. DBを更新する(ここではユニークなキーとしてIDを渡すこと)
   useEffect(() => {
-    axios(`http://localhost:8001/${userId}/ranking/${trackId}/${trackName}`, {
+    axios(`http://localhost:8000/${userId}/ranking/${trackId}/${trackName}`, {
       method: "POST",
     })
       .then((FeatureResponse) => {
@@ -42,7 +42,7 @@ export default function UpdateRankingList(props: Props) {
   }, [trackId]);
 
   useEffect(() => {
-    axios(`http://localhost:8001/${userId}/ranking`, {
+    axios(`http://localhost:8000/${userId}/ranking`, {
       method: "GET",
     })
       // 楽曲情報のリストを取得する

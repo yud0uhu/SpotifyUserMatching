@@ -10,7 +10,7 @@ export default function SeacrchResultList(props: Props) {
   const [albumTrack, setAlbumTrack] = useState([]);
 
   const trackPreview = (trackTerm: string) => {
-    axios(`http://localhost:8001/search/${trackTerm}`, {
+    axios(`http://localhost:8000/search/${trackTerm}`, {
       method: "GET",
     })
       .then((AlbumResponse) => {
