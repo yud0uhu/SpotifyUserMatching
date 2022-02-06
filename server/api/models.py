@@ -5,7 +5,13 @@ from sqlalchemy.orm import (scoped_session, sessionmaker, relationship,
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql.base import ColumnSet
 
-engine = create_engine('sqlite:///database.sqlite3', convert_unicode=True)
+# engine = create_engine('sqlite:///database.sqlite3', convert_unicode=True)
+SQLALCHEMY_DATABASE_URL = "postgresql://postgres:postgres@db:5432/postgres"
+
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+)
+
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
