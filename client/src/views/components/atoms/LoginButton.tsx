@@ -1,9 +1,12 @@
 import { useAuth0 } from "@auth0/auth0-react";
 
 const LoginButton = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
-  return <button onClick={() => loginWithRedirect()}>Log In</button>;
+  // Auth0のSSOエンドポイントからログインした後に、自身のアプリケーションにリダイレクト
+  return !isAuthenticated ? (
+    <button onClick={loginWithRedirect}>Log In</button>
+  ) : null;
 };
 
 export default LoginButton;
