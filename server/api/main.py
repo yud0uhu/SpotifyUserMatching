@@ -103,7 +103,10 @@ def private_scoped(response: Response, token: str = Depends(token_auth_scheme)):
     this route
     """
 
+    print("connect!")
+
     result = VerifyToken(token.credentials, scopes="read:messages").verify()
+    print(result)
 
     if result.get("status"):
         response.status_code = status.HTTP_400_BAD_REQUEST
@@ -111,7 +114,6 @@ def private_scoped(response: Response, token: str = Depends(token_auth_scheme)):
 
     userId,userName,twitterId,profile_image_url = user_session.init_user_login(result)
 
-    user_info = {}
     user_info = {"userId":userId,"userName":userName,"twitterId":twitterId,"profileImageUrl":profile_image_url}
 
     return user_info
