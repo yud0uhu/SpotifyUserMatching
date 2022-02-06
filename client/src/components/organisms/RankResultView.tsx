@@ -11,33 +11,6 @@ type Props = {
 };
 export default function RankResultView(porps: Props) {
   const { userId } = porps;
-  // const [tracks, setTracks] = useState({});
-
-  // const location = useLocation();
-
-  // console.log(location.state);
-
-  // useEffect(() => {
-  //   axios(
-  //     `http://ec2-54-82-215-43.compute-1.amazonaws.com:8001/${userId}/ranking`,
-  //     {
-  //       method: "GET",
-  //     }
-  //   )
-  //     // 楽曲情報のリストを取得する
-  //     .then((TrackInfoResponse) => {
-  //       console.log(TrackInfoResponse.data);
-  //       const trackInfoResponse = TrackInfoResponse.data.map(
-  //         (index: number) => index
-  //       );
-  //       setTracks(trackInfoResponse);
-  //       console.log("select_feature_track_response:" + trackInfoResponse);
-  //     })
-  //     .catch((err) => {
-  //       console.log("err:", err);
-  //     });
-  // }, [userId]);
-  // console.log(tracks);
 
   function UpdateRankingListRender() {
     return <UpdateRankingList userId={userId} />;
