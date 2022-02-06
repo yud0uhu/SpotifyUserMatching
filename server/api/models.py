@@ -6,10 +6,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql.base import ColumnSet
 
 # engine = create_engine('sqlite:///database.sqlite3', convert_unicode=True)
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:postgres@db:5432/postgres"
+SQLALCHEMY_DATABASE_URL = 'postgresql://postgres:postgres@db:5432/postgres'
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+    SQLALCHEMY_DATABASE_URL
 )
 
 db_session = scoped_session(sessionmaker(autocommit=False,
@@ -51,9 +51,8 @@ class FeatureTrack(Base):
     acousticness =Column(Integer)
     # Trackにrelationを張る,1Trackに対して1特徴量データ
     track_id = Column(Integer, ForeignKey('tracks.track_id'), primary_key=True)
-    user_id = Column(Integer, primary_key=True)
-    tracks=relationship(
+    track=relationship(
         Track,
         backref=backref('feature_tracks', uselist=True, cascade='delete,all'))
 
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)

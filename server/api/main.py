@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 from starlette_graphene3 import GraphQLApp
 
 from models import db_session
-from schema import Query,MyMutations
+# from schema import Query,MyMutations
 
 from starlette.middleware.cors import CORSMiddleware 
 
