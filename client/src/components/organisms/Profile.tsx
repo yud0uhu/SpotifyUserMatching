@@ -12,7 +12,7 @@ const Profile = (props: any) => {
     error,
     refresh,
     data: users,
-  } = useApi("http://localhost:8081/private-scoped", opts);
+  } = useApi("http://localhost:8001/private-scoped", opts);
 
   console.log(users);
 
