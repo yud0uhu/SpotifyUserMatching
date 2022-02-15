@@ -10,7 +10,7 @@ export default function SeacrchResultList(props: Props) {
   const [albumTrack, setAlbumTrack] = useState([]);
 
   const trackPreview = (trackTerm: string) => {
-    axios(`http://alltime-music-ranking.herokuapp.com/search/${trackTerm}`, {
+    axios(`https://alltime-music-ranking.herokuapp.com/search/${trackTerm}`, {
       method: "GET",
     })
       .then((AlbumResponse) => {

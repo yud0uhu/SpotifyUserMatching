@@ -6,7 +6,7 @@ export default function SendAction(
   handleChangeDataState: Function
 ) {
   // const userId = 1;
-  axios(`http://alltime-music-ranking.herokuapp.com/user/${userId}`, {
+  axios(`https://alltime-music-ranking.herokuapp.com/user/${userId}`, {
     method: "GET",
   })
     .then((UserResponse) => {
