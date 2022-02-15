@@ -1,12 +1,31 @@
 version: "3"
 
+volumes:
+  pgdb:
+    driver: "local"
 services:
   api:
-    container_name: spotify-user-matching-server
+    container_name: spotify-user-matching-api
     build: ./docker/uvicorn
     restart: always
     tty: true
     ports:
-      - 8001:8000
+      - 8000:8000
+    env_file: ./api/.env
     volumes:
       - ./api:/usr/src/api
+    depends_on:
+      - db
+
+  db:
+    image: postgres:11-alpine
+    container_name: spotify-user-matching-db
+    ports:
+      - "5432:5432"
+    # datavase file をvolumeにマウントし永続化
+    volumes:
+      - pgdb:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=spotify-user-matching-db

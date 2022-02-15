@@ -18,3 +18,4 @@ pycparser
 pydantic
 typing-extensions
 tweepy
+psycopg2

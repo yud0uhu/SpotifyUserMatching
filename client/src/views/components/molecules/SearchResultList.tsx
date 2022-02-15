@@ -10,12 +10,9 @@ export default function SeacrchResultList(props: Props) {
   const [albumTrack, setAlbumTrack] = useState([]);
 
   const trackPreview = (trackTerm: string) => {
-    axios(
-      `http://ec2-54-82-215-43.compute-1.amazonaws.com:8001/search/${trackTerm}`,
-      {
-        method: "GET",
-      }
-    )
+    axios(`http://alltime-music-ranking.herokuapp.com/search/${trackTerm}`, {
+      method: "GET",
+    })
       .then((AlbumResponse) => {
         const albumResponse = AlbumResponse.data.map((index: number) => index);
         const alubums = albumResponse.map((alubum: number) => alubum);

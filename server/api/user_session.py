@@ -5,7 +5,7 @@ from models import Base, engine, db_session, User
 from sqlalchemy.sql.expression import null
 from dotenv import load_dotenv
 
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
 
 load_dotenv()
 
@@ -13,6 +13,7 @@ TWITTER_API_KEY = os.environ.get("TWITTER_API_KEY")
 TWITTER_API_SECRET_KEY= os.environ.get("TWITTER_API_SECRET_KEY")
 TWITTER_ACCSESS_TOKEN = os.environ.get("TWITTER_ACCSESS_TOKEN")
 TWITTER_ACCSESS_TOKEN_SECRET = os.environ.get("TWITTER_ACCSESS_TOKEN_SECRET")
+
 
 auth = tweepy.OAuthHandler(TWITTER_API_KEY, TWITTER_API_SECRET_KEY)
 
