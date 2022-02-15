@@ -19,3 +19,4 @@ pydantic
 typing-extensions
 tweepy
 psycopg2
+gunicorn

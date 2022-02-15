@@ -4,4 +4,4 @@ setup:
       as: DATABASE
 build:
   docker:
-    api: ./docker/uvicorn/Dockerfile
+    web: Dockerfile
