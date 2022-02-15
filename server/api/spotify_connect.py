@@ -13,7 +13,7 @@ load_dotenv()
 from models import engine, db_session, Base, User, Track, FeatureTrack
 from sqlalchemy.sql.expression import null
 
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
 
 client_id = os.environ.get("SPOTIPY_CLIENT_ID")
 client_secret = os.environ.get("SPOTIPY_CLIENT_SECRET")

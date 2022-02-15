@@ -31,7 +31,7 @@ export default function UpdateRankingList(props: Props) {
   // 1. DBを更新する(ここではユニークなキーとしてIDを渡すこと)
   useEffect(() => {
     axios(
-      `http://ec2-54-82-215-43.compute-1.amazonaws.com:8001/${userId}/ranking/${trackId}/${trackName}`,
+      `https://alltime-music-ranking.herokuapp.com/${userId}/ranking/${trackId}/${trackName}`,
       {
         method: "POST",
       }
@@ -45,12 +45,9 @@ export default function UpdateRankingList(props: Props) {
   }, [trackId]);
 
   useEffect(() => {
-    axios(
-      `http://ec2-54-82-215-43.compute-1.amazonaws.com:8001/${userId}/ranking`,
-      {
-        method: "GET",
-      }
-    )
+    axios(`https://alltime-music-ranking.herokuapp.com/${userId}/ranking`, {
+      method: "GET",
+    })
       // 楽曲情報のリストを取得する
       .then((TrackInfoResponse) => {
         console.log(TrackInfoResponse.data);

@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 from starlette_graphene3 import GraphQLApp
 
 from models import db_session
-from schema import Query,MyMutations
+# from schema import Query,MyMutations
 
 from starlette.middleware.cors import CORSMiddleware 
 
@@ -43,7 +43,7 @@ app.add_middleware(
 async def root():
     return {"message": "Contact Applications!"}
 
-app.add_route("/graphql", GraphQLApp(schema=graphene.Schema(query=Query,mutation=MyMutations)))
+# app.add_route("/graphql", GraphQLApp(schema=graphene.Schema(query=Query,mutation=MyMutations)))
 
 # 楽曲情報を検索
 @app.get("/search/{track_term}")

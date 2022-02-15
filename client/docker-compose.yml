@@ -2,8 +2,7 @@ version: "3"
 services:
   app:
     container_name: spotify-user-matching-client
-    # image: node:16-alpine
-    image: public.ecr.aws/b6w3b5r6/all-time-music-ranking-client:latest
+    image: node:16-alpine
     volumes:
       - ./:/app
     working_dir: /app
