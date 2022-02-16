@@ -6,7 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql.base import ColumnSet
 
 # engine = create_engine('sqlite:///database.sqlite3', convert_unicode=True)
-SQLALCHEMY_DATABASE_URL = 'postgresql://postgres:postgres@db:5432/postgres'
+SQLALCHEMY_DATABASE_URL = 'postgresql://wiyhjbzxcbwxdi:b65547a20cdd587365211a41042eaed3bc94debacf631f4571c69ae35256661e@ec2-34-193-235-32.compute-1.amazonaws.com:5432/ddorp0orvotk3g'
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL
