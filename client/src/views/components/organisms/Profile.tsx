@@ -13,7 +13,7 @@ const Profile = (props: any) => {
     refresh,
     data: users,
   } = useApi(
-    "https://alltime-music-ranking.herokuapp.com/private-scoped",
+    "https://alltime-music-ranking.herokuapp.com/api/private-scoped",
     opts
   );
 
