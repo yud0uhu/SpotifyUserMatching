@@ -30,12 +30,9 @@ export default function UpdateRankingList(props: Props) {
   // uniquetracksは配列にし、順々に追加したい
   // 1. DBを更新する(ここではユニークなキーとしてIDを渡すこと)
   useEffect(() => {
-    axios(
-      `https://alltime-music-ranking.herokuapp.com/${userId}/ranking/${trackId}/${trackName}`,
-      {
-        method: "POST",
-      }
-    )
+    axios(`http://localhost:8000/${userId}/ranking/${trackId}/${trackName}`, {
+      method: "POST",
+    })
       .then((FeatureResponse) => {
         console.log(FeatureResponse);
       })
@@ -45,7 +42,7 @@ export default function UpdateRankingList(props: Props) {
   }, [trackId]);
 
   useEffect(() => {
-    axios(`https://alltime-music-ranking.herokuapp.com/${userId}/ranking`, {
+    axios(`http://localhost:8000/${userId}/ranking`, {
       method: "GET",
     })
       // 楽曲情報のリストを取得する
