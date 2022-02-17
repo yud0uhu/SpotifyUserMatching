@@ -12,9 +12,14 @@ engine = create_engine(
     SQLALCHEMY_DATABASE_URL
 )
 
-db_session = scoped_session(sessionmaker(autocommit=False,
-                                         autoflush=False,
-                                         bind=engine))
+db_session = scoped_session(
+    # ORM実行時の設定
+    sessionmaker(
+            autocommit=False,
+            autoflush=False,
+            bind=engine
+        )
+    )
 
 Base = declarative_base()
 Base.query = db_session.query_property()
@@ -22,7 +27,7 @@ Base.query = db_session.query_property()
 class User(Base):
     __tablename__ = 'users'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(String, primary_key=True)
     twitter_id = Column(String)
     user_name = Column(String)
     profile_image_url = Column(String)
@@ -36,7 +41,7 @@ class Track(Base):
     spotify_url = Column(Integer)
     cover_art = Column(Integer)
     # Userにrelationを張る,1ユーザーに対して1Track
-    user_id = Column('user_id', Integer, ForeignKey('users.id'))
+    user_id = Column('user_id', String, ForeignKey('users.id'))
     user=relationship(
         User,
         backref=backref('tracks', uselist=True, cascade='delete,all'))
