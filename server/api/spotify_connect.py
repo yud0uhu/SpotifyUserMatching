@@ -128,6 +128,7 @@ def select_match_user(user_id):
     preference = 0
     match_100_user_list = []
     match_20_user_list = []
+    match_15_user_list = []
     
     all_users = db_session.query(User).all()
 
@@ -155,7 +156,7 @@ def select_match_user(user_id):
                 all()
             for user in users:
                 match_100_user_list.append(user)
-        # ?%マッチ
+        # 20%マッチ
         elif (preference-1) < all_user.preference < preference*0.2:
             # print(all_user.id)
             users = db_session.query(user).\
@@ -163,6 +164,14 @@ def select_match_user(user_id):
                 all()
             for user in users:
                 match_20_user_list.append(user)
+        # 15%マッチ
+        elif (preference-1) < all_user.preference < preference*0.15:
+            # print(all_user.id)
+            users = db_session.query(user).\
+                filter(user.id==all_user.id).\
+                all()
+            for user in users:
+                match_15_user_list.append(user)                
         else:
             pass
     return match_100_user_list, match_20_user_list
