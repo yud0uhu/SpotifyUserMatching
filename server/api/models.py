@@ -31,7 +31,7 @@ class User(Base):
 class Track(Base):
     __tablename__ = 'tracks'
     
-    track_id = Column(Integer, primary_key=True)
+    track_id = Column(String, primary_key=True)
     track_name = Column(String)
     spotify_url = Column(Integer)
     cover_art = Column(Integer)
@@ -49,7 +49,7 @@ class FeatureTrack(Base):
     mode =Column(Integer)
     acousticness =Column(Integer)
     # Trackにrelationを張る,1Trackに対して1特徴量データ
-    track_id = Column('track_id', Integer, ForeignKey('tracks.track_id'), primary_key=True)
+    track_id = Column('track_id', String, ForeignKey('tracks.track_id'), primary_key=True)
     track=relationship(
         Track,
         backref=backref('feature_tracks', uselist=True, cascade='delete,all'))
