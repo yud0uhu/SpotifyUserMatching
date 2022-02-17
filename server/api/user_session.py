@@ -31,15 +31,18 @@ def init_user_login(result):
     userName = userInfo.name
     profileImageUrl = userInfo.profile_image_url
 
-    user = User()
+    # user = User()
     
-    user.id=userId
-    user.twitter_id=twitterId
-    user.user_name=userName
-    user.profile_image_url=profileImageUrl
-    user.preference=0
+    # user.id=userId
+    # user.twitter_id=twitterId
+    # user.user_name=userName
+    # user.profile_image_url=profileImageUrl
+    # user.preference=0
 
-    db_session.add(user)
+    # db_session.add(user)
+
+    sql = "insert into users (id,twitter_id,user_name,profile_image_url,preference) select '%s','%s','%s','%s',%d where NOT EXISTS (select id from users where users.id = '%s')" % (str(userId),twitterId,userName,profileImageUrl,0,str(userId))
+    db_session.execute(sql)
 
     db_session.commit()
 
