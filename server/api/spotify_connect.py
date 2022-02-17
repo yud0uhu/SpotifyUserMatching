@@ -1,3 +1,4 @@
+import numpy as np
 from lib2to3.pytree import convert
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -59,7 +60,7 @@ def postTrackFeature(user_id,track_id,track_name):
 
         coverArt = track_info[0]["album"]["images"][0]["url"]
         
-        insert_feature_track(user_id,features[0],track_name,cover_art=coverArt,spotify_url=spotifyUrl)
+        insert_feature_track(user_id,features[0],track_name,coverArt,spotifyUrl)
 
     except IndexError:
         print("IndexError has occurred!")
@@ -69,23 +70,31 @@ def postTrackFeature(user_id,track_id,track_name):
 def insert_feature_track(id,feature,track_name,cover_art,spotify_url):
     track_id=feature['id']
 
-    feature_track = FeatureTrack()
+    # feature_track = FeatureTrack()
 
     try:
         
         # 初回のみ普通にINSERT
-        track = Track(user_id=id, track_id=track_id, track_name=track_name,cover_art=cover_art,spotify_url=spotify_url)
-        db_session.add(track)
+        # track = Track(user_id=str(id), track_id=track_id, track_name=track_name,cover_art=cover_art,spotify_url=spotify_url)
+        # db_session.add(track)
+
+        # db_session.commit()
 
         # 楽曲IDがユニークではない時INSERTせずUPDATEする
         # Track.update().\
         #     where(Track.track_id==track_id).\
         #     values(track_id=track_id, track_name=track_name,cover_art=cover_art,spotify_url=spotify_url)
         
-        feature_track = FeatureTrack(energy=feature['energy'], danceability=feature['danceability'], mode=feature['mode'], acousticness=feature['acousticness'], track_id=feature['id'], user_id=id)
-        db_session.add(feature_track)
+        sql = "insert into tracks (user_id,track_id,track_name,cover_art,spotify_url) select '%s','%s','%s','%s','%s'" % (str(id),track_id,track_name,cover_art,spotify_url,track_id)
+        db_session.execute(sql)
 
-        db_session.commit()
+        # feature_track = FeatureTrack(energy=feature['energy'], danceability=feature['danceability'], mode=feature['mode'], acousticness=feature['acousticness'], track_id=feature['id'])
+        # db_session.add(feature_track)
+
+        # db_session.commit()
+
+        sql = "insert into feature_tracks (energy,danceability,mode,acousticness,track_id) select '%s','%s','%s','%s','%s'" % (energy,danceability,mode,acousticness,track_id,track_id)
+        db_session.execute(sql)
         
             
     except:
@@ -113,7 +122,6 @@ def select_feature_track(user_id):
             filter(Track.user_id==user_id).\
             all()
         print(track)
-        # track = db_session.query(Track).all()
 
         return track
 
@@ -128,7 +136,6 @@ def select_match_user(user_id):
     preference = 0
     match_100_user_list = []
     match_20_user_list = []
-    match_15_user_list = []
     
     all_users = db_session.query(User).all()
 
@@ -150,28 +157,18 @@ def select_match_user(user_id):
     
         # 100%マッチ
         if preference == all_user.preference:
-            # print(all_user.id)
             users = db_session.query(User).\
                 filter(User.id==all_user.id).\
                 all()
             for user in users:
                 match_100_user_list.append(user)
-        # 20%マッチ
+        # ?%マッチ
         elif (preference-1) < all_user.preference < preference*0.2:
-            # print(all_user.id)
             users = db_session.query(user).\
                 filter(user.id==all_user.id).\
                 all()
             for user in users:
                 match_20_user_list.append(user)
-        # 15%マッチ
-        elif (preference-1) < all_user.preference < preference*0.15:
-            # print(all_user.id)
-            users = db_session.query(user).\
-                filter(user.id==all_user.id).\
-                all()
-            for user in users:
-                match_15_user_list.append(user)                
         else:
             pass
     return match_100_user_list, match_20_user_list
@@ -184,31 +181,23 @@ def insert_user_preference(user_id):
     mode = 0
     # ユーザーIDをキーに楽曲情報と特徴量をすべて取得する
     all_feature_tracks = db_session.query(FeatureTrack).\
-        filter(FeatureTrack.user_id==user_id).\
+        filter(Track.user_id==user_id).\
         all()
-    # all_feature_tracks = db_session.query(FeatureTrack).all()
     for featuretrack in all_feature_tracks:
         energy+=featuretrack.energy
         danceability+=featuretrack.danceability
         mode+=featuretrack.mode
-    # print(energy/len(all_feature_tracks))
     # 特徴量のうち、エネルギーの平均を出す
-    energy_avarage=energy/len(all_feature_tracks)
-    danceability_avarage=energy/len(all_feature_tracks)
-    mode_avarage=energy/len(all_feature_tracks)
-    preference = energy_avarage + danceability_avarage + mode_avarage / 3
+    energy_avarage=np.mean(energy)
+    danceability_avarage=np.mean(danceability)
+    mode_avarage=np.mean(mode)
+    preference = energy_avarage + danceability_avarage + mode_avarage
 
     # ユーザーテーブルに好みを登録する
-    user = db_session.query(User).filter(User.id==user_id).first()
-    user.preference=preference
-    # db_session.query(User).get(user_id).preference = energy_avarage
+    sql = "update users set preference = %d where users.id = '%s'" % (preference,str(user_id))
+    db_session.execute(sql)
 
     db_session.commit()
-
-# def hogehoge() :
-#     users = db_session.query(FeatureTrack.track_id).all()
-#     for user in users:
-#         return user
 
 if __name__ == '__main__':
     # nameをフロント側から受け取る
