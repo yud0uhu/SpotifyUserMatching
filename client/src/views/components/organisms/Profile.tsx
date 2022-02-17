@@ -1,4 +1,4 @@
-import { useApi } from "../../../use-api";
+import { useApi } from "../../../lib/use-api";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = (props: any) => {

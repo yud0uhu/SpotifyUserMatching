@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // マッチユーザーのリストを取得する
-export default function SendAction(
+export default function GetMatchUserList(
   userId: number,
   handleChangeDataState: Function
 ) {
