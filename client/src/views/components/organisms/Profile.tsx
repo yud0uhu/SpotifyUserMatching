@@ -1,4 +1,4 @@
-import { useApi } from "../../../use-api";
+import { useApi } from "../../../lib/use-api";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = (props: any) => {
@@ -12,10 +12,7 @@ const Profile = (props: any) => {
     error,
     refresh,
     data: users,
-  } = useApi(
-    "https://alltime-music-ranking.herokuapp.com/api/private-scoped",
-    opts
-  );
+  } = useApi("http://localhost:8000/api/private-scoped", opts);
 
   console.log(users);
 
