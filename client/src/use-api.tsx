@@ -18,7 +18,6 @@ export const useApi = (url: string, options: any) => {
         const accessToken = await getAccessTokenSilently({ audience, scope });
         const res = await fetch(url, {
           ...fetchOptions,
-          mode: "no-cors",
           headers: {
             ...fetchOptions.headers,
             // Add the Authorization header to the existing headers
