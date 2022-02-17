@@ -1,16 +1,17 @@
 import { useState } from "react";
 import Header from "./views/components/organisms/Header";
 import SearchView from "./views/components/organisms/SearchView";
-import GetMatchUserList from "./lib/api-connection";
+import { GetMatchUserList } from "./lib/api-connection";
 import SearchResultView from "./views/components/organisms/SearchResultView";
 import RankResultView from "./views/components/organisms/RankResultView";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default function App() {
   const [userId, setuserId] = useState(0);
+
   const [uniqueData, setUniqueData] = useState<[][]>([]);
 
-  console.log(userId);
+  // console.log(userId);
 
   const handleClear = () => {
     console.log("Clear!");

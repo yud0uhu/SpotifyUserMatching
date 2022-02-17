@@ -1,10 +1,11 @@
-import { useLocation } from "react-router-dom";
-import { faCrown, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  GetUserRankingList,
+  PostUserRankingList,
+} from "../../../lib/api-connection";
 import RankReSetButton from "../atoms/RankReSetButton";
 import UpdateRankingList from "../molecules/UpdateRankingList";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 type Props = {
   userId: number;
@@ -13,7 +14,8 @@ export default function RankResultView(porps: Props) {
   const { userId } = porps;
 
   function UpdateRankingListRender() {
-    return <UpdateRankingList userId={userId} />;
+    PostUserRankingList();
+    return <UpdateRankingList />;
   }
 
   return (
