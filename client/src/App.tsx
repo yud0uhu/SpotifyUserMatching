@@ -48,7 +48,10 @@ export default function App() {
               />
             }
           />
-          <Route path="/ranking" element={<RankResultView userId={userId} />} />
+          <Route
+            path="/ranking"
+            element={<RankResultView userId={userId ? userId : 0} />}
+          />
           <Route
             path="/setting"
             element={<SearchResultView userId={userId ? userId : 0} />}
