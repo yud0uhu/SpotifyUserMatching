@@ -8,7 +8,7 @@ import RankReSetButton from "../atoms/RankReSetButton";
 import UpdateRankingList from "../molecules/UpdateRankingList";
 
 type Props = {
-  userId: number;
+  userId: string;
 };
 export default function RankResultView(porps: Props) {
   const { userId } = porps;

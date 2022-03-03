@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SearchResultList from "../molecules/SearchResultList";
 
 type Props = {
-  userId: number;
+  userId: string;
 };
 export default function SearchResultView(props: Props) {
   const { userId } = props;

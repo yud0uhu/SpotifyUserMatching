@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 // マッチユーザーのリストを取得する
 export const GetMatchUserList = (
-  userId: number,
+  userId: String,
   handleChangeDataState: Function
 ) => {
   useEffect(() => {

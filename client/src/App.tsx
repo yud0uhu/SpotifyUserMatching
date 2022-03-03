@@ -7,7 +7,7 @@ import RankResultView from "./views/components/organisms/RankResultView";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default function App() {
-  const [userId, setuserId] = useState(0);
+  const [userId, setuserId] = useState("");
 
   const [uniqueData, setUniqueData] = useState<[][]>([]);
 
@@ -50,11 +50,11 @@ export default function App() {
           />
           <Route
             path="/ranking"
-            element={<RankResultView userId={userId ? userId : 0} />}
+            element={<RankResultView userId={userId ? userId : "0"} />}
           />
           <Route
             path="/setting"
-            element={<SearchResultView userId={userId ? userId : 0} />}
+            element={<SearchResultView userId={userId ? userId : "0"} />}
           />
         </Routes>
       </BrowserRouter>

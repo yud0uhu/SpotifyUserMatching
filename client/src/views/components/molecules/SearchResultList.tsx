@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import SearchResulutCard from "../atoms/SearchResulutCard";
 type Props = {
-  userId: number;
+  userId: string;
   trackTerm: string;
 };
 export default function SeacrchResultList(props: Props) {
